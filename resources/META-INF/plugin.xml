@@ -1,16 +1,26 @@
 <idea-plugin version="2">
   <id>com.github.leomillon.uuidgenerator</id>
   <name>UUID Generator</name>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
   <vendor>Léo Millon (@leo_millon)</vendor>
 
-  <description><![CDATA[
-      A universally unique identifier (UUID) generator.<br>
-      <br>
-      For example : <em>123e4567-e89b-12d3-a456-426655440000</em>.<br>
+  <description><![CDATA[<html>
+      A universally unique identifier (UUID) generator.<br/>
+      <br/>
+      For example : <em>123e4567-e89b-12d3-a456-426655440000</em>.<br/>
       <br>
       You will find it in the <strong>Generate popup</strong> -> <strong>Random UUID</strong>.
-    ]]></description>
+    </html>]]></description>
+
+  <change-notes><![CDATA[
+        <html>
+        <b>Changes in version 1.1.0:</b>
+        <ul>
+            <li>#2: Support of multi caret and selection</li>
+        </ul>
+        </html>
+        ]]>
+  </change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
   <idea-version since-build="141.0"/>
