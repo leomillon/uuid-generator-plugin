@@ -22,17 +22,15 @@
  *  THE SOFTWARE.
  */
 
-import java.util.UUID;
-
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.openapi.editor.CaretModel;
+import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
+import java.util.UUID;
 
 /**
  * A random UUID generator action.
@@ -50,34 +48,34 @@ public class RandomGenerator extends AnAction {
             return;
         }
 
-        final Document document = editor.getDocument();
-        final SelectionModel selectionModel = editor.getSelectionModel();
-        final CaretModel caretModel = editor.getCaretModel();
-
         //New instance of Runnable to make a replacement
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-
-                UUID uuid = UUID.randomUUID();
-                int textLength = uuid.toString().length();
-                int start;
-                if (selectionModel.hasSelection()) {
-                    start = selectionModel.getSelectionStart();
-                    int end = selectionModel.getSelectionEnd();
-
-                    document.replaceString(start, end, uuid.toString());
-                    selectionModel.setSelection(start, start + textLength);
-                } else {
-                    start = caretModel.getOffset();
-
-                    document.insertString(start, uuid.toString());
+                for (Caret caret : editor.getCaretModel().getAllCarets()) {
+                    insertTextAtCaret(caret, UUID.randomUUID().toString());
                 }
-
-                caretModel.moveToOffset(start + textLength);
             }
         };
         //Making the replacement
         WriteCommandAction.runWriteCommandAction(project, runnable);
+    }
+
+    private static void insertTextAtCaret(Caret caret, CharSequence text) {
+        int textLength = text.length();
+        int start;
+        Document document = caret.getEditor().getDocument();
+        if (caret.hasSelection()) {
+            start = caret.getSelectionStart();
+            int end = caret.getSelectionEnd();
+
+            document.replaceString(start, end, text);
+            caret.setSelection(start, start + textLength);
+        } else {
+            start = caret.getOffset();
+
+            document.insertString(start, text);
+        }
+        caret.moveToOffset(start + textLength);
     }
 }
