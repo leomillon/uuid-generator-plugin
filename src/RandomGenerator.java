@@ -1,7 +1,8 @@
 /**
  * The MIT License (MIT)
  * 
- *  Copyright (c) 2015 Léo Millon
+ *  Copyright for portions of project uuid-generator-plugin are held by Léo Millon, 2015. 
+ *  All other copyright for project instanceid-generator-plugin are held by Eric Boivin, 2017.
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +23,8 @@
  *  THE SOFTWARE.
  */
 
+package myplugins;
+
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -30,14 +33,10 @@ import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import java.util.UUID;
 
-/**
- * A random UUID generator action.
- *
- * @author Léo Millon
- */
-public class RandomGenerator extends AnAction {
+import java.util.Random;
+
+public class InstanceIDGenerator extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
@@ -53,7 +52,14 @@ public class RandomGenerator extends AnAction {
             @Override
             public void run() {
                 for (Caret caret : editor.getCaretModel().getAllCarets()) {
-                    insertTextAtCaret(caret, UUID.randomUUID().toString());
+                    char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+                    StringBuilder sb = new StringBuilder();
+                    Random random = new Random();
+                    for (int i = 0; i < 4; i++) {
+                        char c = chars[random.nextInt(chars.length)];
+                        sb.append(c);
+                    }
+                    insertTextAtCaret(caret, sb.toString());
                 }
             }
         };
