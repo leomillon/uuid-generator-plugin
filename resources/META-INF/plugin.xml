@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.github.leomillon.uuidgenerator</id>
   <name>UUID Generator</name>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
   <vendor>Léo Millon (@leo_millon)</vendor>
 
   <description><![CDATA[<html>
@@ -14,6 +14,15 @@
 
   <change-notes><![CDATA[
         <html>
+        <b>Changes in version 1.2.0:</b>
+        <ul>
+            <li>
+              It is now possible to toggle uuid dashes (Action : <strong>Toggle UUID dashes</strong>).<br/>
+              For example :<br/>
+              <em>123e4567e89b12d3a456426655440000</em> to <em>123e4567-e89b-12d3-a456-426655440000</em><br/>
+              <em>123e4567-e89b-12d3-a456-426655440000</em> to <em>123e4567e89b12d3a456426655440000</em>
+            </li>
+        </ul>
         <b>Changes in version 1.1.0:</b>
         <ul>
             <li>#2: Support of multi caret and selection</li>
@@ -39,6 +48,11 @@
             description="Generate an universally unique identifier (UUID)">
       <add-to-group group-id="GenerateGroup" anchor="last"/>
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt U" />
+    </action>
+    <action id="uuidgenerator.toggle-dashes" class="ToogleDashesAction" text="Toggle UUID dashes"
+            description="Toggle the dashes of a valid UUID">
+      <add-to-group group-id="EditorActions" />
+      <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt T" second-keystroke="shift meta alt T" />
     </action>
   </actions>
 
