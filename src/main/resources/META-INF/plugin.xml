@@ -1,8 +1,8 @@
-<idea-plugin version="2">
+<idea-plugin>
   <id>com.github.leomillon.uuidgenerator</id>
   <name>UUID Generator</name>
-  <version>1.2.0</version>
-  <vendor>Léo Millon (@leo_millon)</vendor>
+  <version>2.0.0</version>
+  <vendor url="https://github.com/leomillon">Léo Millon (@leo_millon)</vendor>
 
   <description><![CDATA[<html>
       A universally unique identifier (UUID) generator.<br/>
@@ -14,6 +14,15 @@
 
   <change-notes><![CDATA[
         <html>
+        <b>Changes in version 2.0.0:</b>
+        <ul>
+            <li>
+              <a href="https://github.com/leomillon/uuid-generator-plugin/issues/4">#4</a>: Fix Android Studio (3.3) compatibility
+            </li>
+            <li>
+              Internal project structure now use Gradle + updated Intellij plugins
+            </li>
+        </ul>
         <b>Changes in version 1.2.0:</b>
         <ul>
             <li>
@@ -31,25 +40,21 @@
         ]]>
   </change-notes>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
   <idea-version since-build="141.0"/>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-       on how to target different products -->
   <depends>com.intellij.modules.lang</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
   </extensions>
 
   <actions>
     <!-- Add your actions here -->
-    <action id="uuidgenerator.random" class="RandomGenerator" text="Random UUID"
+    <action id="uuidgenerator.random" class="com.github.leomillon.uuidgenerator.RandomGenerator" text="Random UUID"
             description="Generate an universally unique identifier (UUID)">
       <add-to-group group-id="GenerateGroup" anchor="last"/>
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt U" />
     </action>
-    <action id="uuidgenerator.toggle-dashes" class="ToogleDashesAction" text="Toggle UUID dashes"
+    <action id="uuidgenerator.toggle-dashes" class="com.github.leomillon.uuidgenerator.ToogleDashesAction" text="Toggle UUID dashes"
             description="Toggle the dashes of a valid UUID">
       <add-to-group group-id="EditorActions" />
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt T" second-keystroke="shift meta alt T" />
