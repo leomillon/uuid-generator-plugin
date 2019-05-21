@@ -6,11 +6,13 @@ buildscript {
 
 plugins {
     id "org.jetbrains.intellij" version "0.4.8"
+    id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.60"
 }
 
 apply plugin: 'idea'
 apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
+apply plugin: 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
 
 intellij {
     version 'IC-2018.3' //IntelliJ IDEA 2018.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
@@ -29,4 +31,9 @@ dependencies {
 publishPlugin {
     username intellijPublishUsername
     password intellijPublishPassword
+}
+
+task gitChangelogTask(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
+    file = new File("CHANGELOG.md");
+    templateContent = file('template_changelog.mustache').getText('UTF-8');
 }
