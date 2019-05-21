@@ -14,27 +14,11 @@
 
   <change-notes><![CDATA[
         <html>
-        <b>Changes in version 2.0.0:</b>
+        <b>Changes in version 2.1.0:</b>
         <ul>
             <li>
-              <a href="https://github.com/leomillon/uuid-generator-plugin/issues/4">#4</a>: Fix Android Studio (3.3) compatibility
+              <a href="https://github.com/leomillon/uuid-generator-plugin/issues/6">#6</a>: Clipboard support
             </li>
-            <li>
-              Internal project structure now use Gradle + updated Intellij plugins
-            </li>
-        </ul>
-        <b>Changes in version 1.2.0:</b>
-        <ul>
-            <li>
-              It is now possible to toggle uuid dashes (Action : <strong>Toggle UUID dashes</strong>).<br/>
-              For example :<br/>
-              <em>123e4567e89b12d3a456426655440000</em> to <em>123e4567-e89b-12d3-a456-426655440000</em><br/>
-              <em>123e4567-e89b-12d3-a456-426655440000</em> to <em>123e4567e89b12d3a456426655440000</em>
-            </li>
-        </ul>
-        <b>Changes in version 1.1.0:</b>
-        <ul>
-            <li>#2: Support of multi caret and selection</li>
         </ul>
         </html>
         ]]>
@@ -53,6 +37,11 @@
             description="Generate an universally unique identifier (UUID)">
       <add-to-group group-id="GenerateGroup" anchor="last"/>
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt U" />
+    </action>
+    <action id="uuidgenerator.to-clipboard" class="com.github.leomillon.uuidgenerator.GenerateToClipboardAction" text="Generate UUID to clipboard"
+            description="Generate a new UUID to clipboard">
+      <add-to-group group-id="GenerateGroup" />
+      <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt C" />
     </action>
     <action id="uuidgenerator.toggle-dashes" class="com.github.leomillon.uuidgenerator.ToogleDashesAction" text="Toggle UUID dashes"
             description="Toggle the dashes of a valid UUID">
