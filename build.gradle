@@ -29,11 +29,17 @@ dependencies {
 }
 
 publishPlugin {
-    username intellijPublishUsername
-    password intellijPublishPassword
+    token project.findProperty('intellijPublishToken') ?: "unknown"
+    channels project.findProperty('intellijPublishChannels') ?: ""
+}
+
+tasks.register("printVersion") {
+    doLast {
+        println "$project.version"
+    }
 }
 
 task gitChangelogTask(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
-    file = new File("CHANGELOG.md");
-    templateContent = file('template_changelog.mustache').getText('UTF-8');
+    file = new File("CHANGELOG.md")
+    templateContent = file('template_changelog.mustache').getText('UTF-8')
 }

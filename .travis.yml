@@ -1,0 +1,47 @@
+language: java
+install: true
+jdk:
+  - openjdk8
+
+env:
+  global:
+    - # INTELLIJ_PUBLISH_TOKEN
+    - secure: "CkODM28RHlSSaXhPNWtw/GlVK4f6xHnJ2vfBOqfWjl3P6clEmrhCd6CXktmZK4LlBTkGey61jDQOi3gYdfsKL44sEQDWSyzr8v46AnezS3eyFccMpAPjUFEJUlRN12NFc03eNmro+XEapIa9kAJ6WWXNmoHxc2ihRR0NOB9BNtWbiFQTvwDcB3emZ4xE+dsnrOWuT5zA8Fv89MAsEbTxkAeI6rkU2iJdTtQXyqIHnTohenCaVBq2TW4hFOGDGrOkbO+t5Ven/5CVhFxgx3bR1Avg4AuTC/hwumyu+14rBvUqqvgqi8dPEd7BsIFLUkXZHaGte3y91+BM87zi7XoomGLeydEPoIFdZHDaNnagvxIjtrF9M4HbIy3U/5A5Lj/hBG4YgU/02t4sLqYzR/xm7vFSkIs3CrDYRIHDOoupuT0Juwuq5EuO/F4CD1/AulF1KZZEhs5saIAI8RKDMXWyw1KCA9QutjZMMxg2rDp+hjzCFUwB61iEgvodKorWi+pppkgPJdHtBLEiElR5dbkRDrGBsOXq/k17RI0Uawet2qF3GaSW1CichN3coh6DG1IMa0znGVuJUZrPi+VIaJ73O0yQlilCPXyT7XT5uMYyeX4bFwvmQa6bVUdvTpsm9VbDDUJM9gtr6Ow2ZmRFOIluZR9S21AWAJzFnPevT9kLj5U="
+
+before_script:
+  - chmod -R ug+x .travis
+
+jobs:
+  include:
+    - stage: test
+      name: Build
+      script: .travis/build.sh
+    - stage: deploy
+      name: Deploy Beta
+      if: tag IS present AND tag =~ ^(\d)+\.(\d)+(\.(\d)+)*(-[\w]+)*-BETA(\d)*$
+      script: .travis/deploy.sh
+    - stage: deploy
+      name: Deploy Release
+      if: tag IS present AND tag =~ ^(\d)+\.(\d)+(\.(\d)+)*(-[\w]+)*$ AND NOT (tag =~ ^(\d)+\.(\d)+(\.(\d)+)*(-[\w]+)*-BETA(\d)*$)
+      script: .travis/deploy.sh
+      deploy:
+        provider: releases
+        api_key:
+          secure: WJhOA4ywpTe0a7ipstGc235aqqCwP6ssGL9Tkr8Pbpd0W3MupEIWn+x8Pz/HHTjp1qp2HkxdPCkcwW3QeZGWuwRVPFwwHh76+MnL+xuzzlpiRuu7QhsTHGysRKICri9cdJBnVUpaOhDUv6+Ml22jIi4PY7Z5eGXo9m5ZB8BnpLVrBqWD5Dzq5B0Te36XG9w138YBb4oMf+xY3FB+HhQdOIssQffJO0X90rmdqWxVSDRia/oY9o5NM/l5QfbcwCXgzG9SIUJQ1ZIeU8PaGQz8jKrnRErC+mUoFgksEYHgSNUCLEZoKwbFZiDobMDFC41UXN0UreewyqKzmtXuU8+qYILAYOxBPBNA96FIW8W/rxXPPv4Hl0gsoqqkRAM6eyBo0C6eKx5o0Q6J0I2neQmsdBLjkRu6Mm7lwXzNwxx/YQvHtNOmkhHzyH7ggzxWShfOLywXcQOMdxps7EWK7XeUfP+8IKMp4mTwfUB1J3vBc0O1PuNzKRVcCsvhaH3e/Ae1pBm34PLTXWjqjcmz2/aio3bJxJKtneQkBR1gqG/AJcbLlseSHKMCh8CPJu2alciVrwW2nmL9hogAjcnxfPusHaOqfNa6qf2CGK8zHix8r4Ord/JsgPA4QsgLHGhZahY1K4A8Nn5b2G5d3OmzWhBLe1bGWO88lNvcku73eRFjo1A=
+        file_glob: true
+        file:
+          - "$TRAVIS_BUILD_DIR/build/libs/*"
+        body: "Release of $TRAVIS_TAG"
+        skip_cleanup: true
+        draft: true
+        on:
+          repo: leomillon/uuid-generator-plugin
+          tags: true
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
