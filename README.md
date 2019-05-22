@@ -2,6 +2,7 @@
 
 A plugin for [JetBrains products](https://www.jetbrains.com/) that generates [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)s.
 
+[![Build Status](https://travis-ci.org/leomillon/uuid-generator-plugin.svg?branch=master)](https://travis-ci.org/leomillon/uuid-generator-plugin)
 [![GitHub (pre-)release](https://img.shields.io/github/release/leomillon/uuid-generator-plugin/all.svg)](https://github.com/leomillon/uuid-generator-plugin/releases)
 [![GitHub license](https://img.shields.io/github/license/leomillon/uuid-generator-plugin.svg)](https://github.com/leomillon/uuid-generator-plugin/blob/master/LICENSE.md)
 
