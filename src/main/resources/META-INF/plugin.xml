@@ -40,7 +40,7 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="uuidgenerator.random" class="com.github.leomillon.uuidgenerator.RandomGenerator" text="Random UUID"
+    <action id="uuidgenerator.random" class="com.github.leomillon.uuidgenerator.GenerateRandomAction" text="Random UUID"
             description="Generate an universally unique identifier (UUID)">
       <add-to-group group-id="GenerateGroup" anchor="last"/>
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt U" />
@@ -50,7 +50,7 @@
       <add-to-group group-id="GenerateGroup" />
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt C" />
     </action>
-    <action id="uuidgenerator.toggle-dashes" class="com.github.leomillon.uuidgenerator.ToogleDashesAction" text="Toggle UUID dashes"
+    <action id="uuidgenerator.toggle-dashes" class="com.github.leomillon.uuidgenerator.ToggleDashesAction" text="Toggle UUID dashes"
             description="Toggle the dashes of a valid UUID">
       <add-to-group group-id="EditorActions" />
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt T" second-keystroke="shift meta alt T" />

@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.16")
 }
 
 tasks.withType<PublishTask> {
