@@ -1,15 +1,10 @@
 package com.github.leomillon.uuidgenerator
 
+import com.github.leomillon.uuidgenerator.DisplayMessageUtils.Companion.displayMessage
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ide.CopyPasteManager
-import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.MessageType
-import com.intellij.openapi.ui.popup.Balloon
-import com.intellij.openapi.ui.popup.JBPopupFactory
-import com.intellij.openapi.wm.WindowManager
-import com.intellij.ui.awt.RelativePoint
 import com.intellij.util.ui.TextTransferable
 import java.util.*
 
@@ -28,20 +23,11 @@ class GenerateToClipboardAction : AnAction() {
 
         anActionEvent.getData(CommonDataKeys.PROJECT)
             ?.run {
-                displayMessage("$generatedUuid copied to clipboard.", this)
+                displayMessage("$generatedUuid copied to clipboard.", this, fadeoutTime = 2000)
             }
     }
 
     private fun toClipboard(text: String) {
         CopyPasteManager.getInstance().setContents(TextTransferable(text))
-    }
-
-    private fun displayMessage(message: String, project: Project) {
-        val statusBar = WindowManager.getInstance().getStatusBar(project)
-        JBPopupFactory.getInstance()
-            .createHtmlTextBalloonBuilder(message, MessageType.INFO, null)
-            .setFadeoutTime(2000)
-            .createBalloon()
-            .show(RelativePoint.getCenterOf(statusBar.component), Balloon.Position.atRight)
     }
 }

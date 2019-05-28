@@ -7,10 +7,6 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.MessageType
-import com.intellij.openapi.ui.popup.Balloon
-import com.intellij.openapi.ui.popup.JBPopupFactory
-import com.intellij.openapi.wm.WindowManager
-import com.intellij.ui.awt.RelativePoint
 
 /**
  * Action that toggle dashes of a uuid.
@@ -46,17 +42,8 @@ class ToggleDashesAction : AnAction() {
         messages.asSequence()
             .joinToString(separator = "<br>")
             .run {
-                displayErrorMessage(this, project)
+                DisplayMessageUtils.displayMessage(this, project, type = MessageType.ERROR)
             }
-    }
-
-    private fun displayErrorMessage(message: String, project: Project) {
-        val statusBar = WindowManager.getInstance().getStatusBar(project)
-        JBPopupFactory.getInstance()
-            .createHtmlTextBalloonBuilder(message, MessageType.ERROR, null)
-            .setFadeoutTime(5000)
-            .createBalloon()
-            .show(RelativePoint.getCenterOf(statusBar.component), Balloon.Position.atRight)
     }
 
     private fun toggleDashes(caret: Caret) {
