@@ -1,30 +1,37 @@
 <idea-plugin>
   <id>com.github.leomillon.uuidgenerator</id>
   <name>UUID Generator</name>
-  <version>2.2.0-SNAPSHOT</version>
+  <version>3.0.0-SNAPSHOT</version>
   <vendor url="https://github.com/leomillon">Léo Millon (@leo_millon)</vendor>
 
   <description><![CDATA[<html>
       A universally unique identifier (UUID) generator.<br/>
       <br/>
       For example : <em>123e4567-e89b-12d3-a456-426655440000</em>.<br/>
-      <br>
+      <br/>
       You will find it in the <strong>Generate popup</strong> -> <strong>Random UUID</strong>.
+      <br/>
+      Available actions :
+      <ul>
+        <li>Random UUID</li>
+        <li>Generate UUID to clipboard</li>
+        <li>Toggle UUID dashes</li>
+      </ul>
     </html>]]></description>
 
   <change-notes><![CDATA[
         <html>
-        <b>Changes in version 2.1.0:</b>
+        <b>Changes in version 3.0.0:</b>
         <ul>
             <li>
-              <a href="https://github.com/leomillon/uuid-generator-plugin/issues/6">#6</a>: Clipboard support
+              Code language migration to Kotlin
             </li>
         </ul>
         </html>
         ]]>
   </change-notes>
 
-  <idea-version since-build="141.0"/>
+  <idea-version since-build="143.0"/>
 
   <depends>com.intellij.modules.lang</depends>
 
@@ -33,7 +40,7 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="uuidgenerator.random" class="com.github.leomillon.uuidgenerator.RandomGenerator" text="Random UUID"
+    <action id="uuidgenerator.random" class="com.github.leomillon.uuidgenerator.GenerateRandomAction" text="Random UUID"
             description="Generate an universally unique identifier (UUID)">
       <add-to-group group-id="GenerateGroup" anchor="last"/>
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt U" />
@@ -43,7 +50,7 @@
       <add-to-group group-id="GenerateGroup" />
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt C" />
     </action>
-    <action id="uuidgenerator.toggle-dashes" class="com.github.leomillon.uuidgenerator.ToogleDashesAction" text="Toggle UUID dashes"
+    <action id="uuidgenerator.toggle-dashes" class="com.github.leomillon.uuidgenerator.ToggleDashesAction" text="Toggle UUID dashes"
             description="Toggle the dashes of a valid UUID">
       <add-to-group group-id="EditorActions" />
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt T" second-keystroke="shift meta alt T" />
