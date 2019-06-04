@@ -1,10 +1,13 @@
-# UUID Generator plugin
+<h1 align="center">Intellij UUID Generator</h1>
+<p align="center">UUID generator plugin for IntelliJ based IDEs.</p>
 
-A plugin for [JetBrains products](https://www.jetbrains.com/) that generates [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)s.
-
-[![Build Status](https://travis-ci.org/leomillon/uuid-generator-plugin.svg?branch=master)](https://travis-ci.org/leomillon/uuid-generator-plugin)
-[![GitHub (pre-)release](https://img.shields.io/github/release/leomillon/uuid-generator-plugin/all.svg)](https://github.com/leomillon/uuid-generator-plugin/releases)
-[![GitHub license](https://img.shields.io/github/license/leomillon/uuid-generator-plugin.svg)](https://github.com/leomillon/uuid-generator-plugin/blob/master/LICENSE.md)
+<p align="center">
+    <a href="https://travis-ci.org/leomillon/uuid-generator-plugin"><img src="https://travis-ci.org/leomillon/uuid-generator-plugin.svg?branch=master"></a>
+    <a href="https://github.com/leomillon/uuid-generator-plugin/releases"><img src="https://img.shields.io/github/release/leomillon/uuid-generator-plugin/all.svg"></a>
+    <a href="https://github.com/leomillon/uuid-generator-plugin/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/leomillon/uuid-generator-plugin.svg"></a>
+    <a href="https://plugins.jetbrains.com/plugin/8320-uuid-generator"><img src="https://img.shields.io/jetbrains/plugin/v/8320-uuid-generator.svg"></a>
+    <a href="https://plugins.jetbrains.com/plugin/8320-uuid-generator"><img src="https://img.shields.io/jetbrains/plugin/d/8320-uuid-generator.svg"></a>
+</p>
 
 ## JetBrains plugin
 
