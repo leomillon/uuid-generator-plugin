@@ -6,7 +6,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ide.CopyPasteManager
 import com.intellij.util.ui.TextTransferable
-import java.util.*
 
 /**
  * Action that generate a UUID into clipboard.
@@ -17,9 +16,9 @@ class GenerateToClipboardAction : AnAction() {
 
     override fun actionPerformed(anActionEvent: AnActionEvent) {
 
-        val generatedUuid = UUID.randomUUID()
+        val generatedUuid = UUIDGenerator.generateUUID()
 
-        toClipboard(generatedUuid.toString())
+        toClipboard(generatedUuid)
 
         anActionEvent.getData(CommonDataKeys.PROJECT)
             ?.run {

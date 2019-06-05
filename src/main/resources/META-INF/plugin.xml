@@ -36,6 +36,9 @@
   <depends>com.intellij.modules.lang</depends>
 
   <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable instance="com.github.leomillon.uuidgenerator.settings.UUIDGeneratorConfigurable"/>
+    <applicationService serviceInterface="com.github.leomillon.uuidgenerator.settings.UUIDGeneratorSettings"
+                        serviceImplementation="com.github.leomillon.uuidgenerator.settings.UUIDGeneratorSettings"/>
   </extensions>
 
   <actions>

@@ -1,4 +1,5 @@
 import org.jetbrains.intellij.tasks.PublishTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 
 plugins {
@@ -18,9 +19,20 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.16")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 
 tasks.withType<PublishTask> {

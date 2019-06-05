@@ -4,7 +4,6 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.command.WriteCommandAction
-import java.util.*
 
 /**
  * A random UUID generator action.
@@ -26,7 +25,7 @@ class GenerateRandomAction : AnAction() {
             editor.caretModel
                 .allCarets
                 .forEach {
-                    EditorDocumentUtils.insertTextAtCaret(it, UUID.randomUUID().toString())
+                    EditorDocumentUtils.insertTextAtCaret(it, UUIDGenerator.generateUUID())
                 }
         }
     }
