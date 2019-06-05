@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.github.leomillon.uuidgenerator</id>
   <name>UUID Generator</name>
-  <version>3.0.0-SNAPSHOT</version>
+  <version>3.0.0-BETA1</version>
   <vendor url="https://github.com/leomillon">Léo Millon (@leo_millon)</vendor>
 
   <description><![CDATA[<html>
