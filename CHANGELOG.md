@@ -3,6 +3,100 @@
 ## Unreleased
 ### No issue
 
+**Set version to 3.0.0**
+
+
+[cfaf5649d99554f](https://github.com/leomillon/uuid-generator-plugin/commit/cfaf5649d99554f) Léo Millon *2019-06-06 21:26:57*
+
+**Set version to 3.0.0-BETA3-SNAPSHOT**
+
+
+[e511e335354ae2c](https://github.com/leomillon/uuid-generator-plugin/commit/e511e335354ae2c) Léo Millon *2019-06-06 20:49:56*
+
+
+## 3.0.0-BETA2
+### No issue
+
+**Set version to 3.0.0-BETA2**
+
+
+[4dd4ecc8084ae7e](https://github.com/leomillon/uuid-generator-plugin/commit/4dd4ecc8084ae7e) Léo Millon *2019-06-06 20:48:13*
+
+**Update README and plugin description with screenshots**
+
+
+[ba9a8b4e5b90b54](https://github.com/leomillon/uuid-generator-plugin/commit/ba9a8b4e5b90b54) Léo Millon *2019-06-06 20:44:49*
+
+**Add plugin icon**
+
+
+[b767ca76f9f5bf3](https://github.com/leomillon/uuid-generator-plugin/commit/b767ca76f9f5bf3) Léo Millon *2019-06-06 16:53:13*
+
+**[FIX] Dashes toggle for new uppercased UUID**
+
+
+[9fafa9b124555c0](https://github.com/leomillon/uuid-generator-plugin/commit/9fafa9b124555c0) Léo Millon *2019-06-06 15:38:27*
+
+**Set version to 3.0.0-BETA2-SNAPSHOT**
+
+
+[5d6af3fdb311265](https://github.com/leomillon/uuid-generator-plugin/commit/5d6af3fdb311265) Léo Millon *2019-06-06 15:38:27*
+
+
+## 3.0.0-BETA1
+### GitHub [#10](https://github.com/leomillon/uuid-generator-plugin/issues/10) UUID format settings    *enhancement*  
+
+**Add settings dialog to define UUID default format #10**
+
+
+[81319f7bc1abf7c](https://github.com/leomillon/uuid-generator-plugin/commit/81319f7bc1abf7c) Léo Millon *2019-06-05 16:50:50*
+
+
+### GitHub [#8](https://github.com/leomillon/uuid-generator-plugin/issues/8) Kotlin migration    *enhancement*  
+
+**Source code literal migration from Java to Kotlin (#8)**
+
+
+[41fb9ea035d479a](https://github.com/leomillon/uuid-generator-plugin/commit/41fb9ea035d479a) Léo Millon *2019-05-28 21:03:22*
+
+**[CI] Migration to Kotlin DSL for gradle build (#8)**
+
+
+[a010bd9992a44b3](https://github.com/leomillon/uuid-generator-plugin/commit/a010bd9992a44b3) Léo Millon *2019-05-28 21:00:49*
+
+
+### No issue
+
+**Set version to 3.0.0-BETA1**
+
+
+[e2ade5339ba83d7](https://github.com/leomillon/uuid-generator-plugin/commit/e2ade5339ba83d7) Léo Millon *2019-06-05 16:58:52*
+
+**[DOC] Rewrite README title, description and add new JetBrains badges**
+
+
+[401681ab319768c](https://github.com/leomillon/uuid-generator-plugin/commit/401681ab319768c) Léo Millon *2019-06-04 12:59:28*
+
+**Add utility class to display messages**
+
+
+[34a5f53739a557e](https://github.com/leomillon/uuid-generator-plugin/commit/34a5f53739a557e) Léo Millon *2019-05-28 21:29:45*
+
+**Add build status badge to README**
+
+
+[37a183a53bf3f5c](https://github.com/leomillon/uuid-generator-plugin/commit/37a183a53bf3f5c) Léo Millon *2019-05-22 12:20:56*
+
+**[CI] Add travis CI configuration**
+
+
+[1a59734cc1e4a6d](https://github.com/leomillon/uuid-generator-plugin/commit/1a59734cc1e4a6d) Léo Millon *2019-05-22 12:17:22*
+
+**Add CHANGELOG**
+
+
+[3ec5eda8dd1a2bd](https://github.com/leomillon/uuid-generator-plugin/commit/3ec5eda8dd1a2bd) Léo Millon *2019-05-21 16:30:41*
+
 **Add README**
 
 
