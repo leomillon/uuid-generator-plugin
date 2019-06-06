@@ -1,45 +1,73 @@
 package com.github.leomillon.uuidgenerator
 
 import assertk.assertThat
+import assertk.assertions.hasMessage
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class EditorDocumentUtilsTest {
 
     companion object {
-        private const val DEFAULT_UUID = "f2280785-1082-4c8b-aeff-bb852eb98783"
-        private const val UUID_NO_DASH = "f228078510824c8baeffbb852eb98783"
+
+        @Suppress("unused")
+        @JvmStatic
+        fun uuidWithAndWithoutDashes() = listOf(
+            Arguments.of(
+                "71bc4adb-1b7c-4827-940c-f1c53a3f7766",
+                "71bc4adb1b7c4827940cf1c53a3f7766"
+            ),
+            Arguments.of(
+                "71BC4ADB-1B7C-4827-940C-F1C53A3F7766",
+                "71BC4ADB1B7C4827940CF1C53A3F7766"
+            )
+        )
+    }
+
+    @ParameterizedTest
+    @MethodSource("uuidWithAndWithoutDashes")
+    fun `should remove dashes from uuid`(uuidWithDashes: String, uuidWithoutDash: String) {
+
+        // When
+        val result = EditorDocumentUtils.toggleUUIDDashes(uuidWithDashes)
+
+        // Then
+        assertThat(result).isEqualTo(uuidWithoutDash)
+    }
+
+    @ParameterizedTest
+    @MethodSource("uuidWithAndWithoutDashes")
+    fun `should insert dashes into uuid`(uuidWithDashes: String, uuidWithoutDash: String) {
+
+        // When
+        val result = EditorDocumentUtils.toggleUUIDDashes(uuidWithoutDash)
+
+        // Then
+        assertThat(result).isEqualTo(uuidWithDashes)
     }
 
     @Test
-    fun `should remove dashes from uuid`() {
+    fun `should remove dashes of incomplete uuid`() {
 
         // When
-        val result = EditorDocumentUtils.toggleUUIDDashes(DEFAULT_UUID)
+        val result = EditorDocumentUtils.toggleUUIDDashes("71bc4adb-1b7c4827-940cf1c53a3f7766")
 
         // Then
-        assertThat(result).isEqualTo(UUID_NO_DASH)
-    }
-
-    @Test
-    fun `should insert dashes into uuid`() {
-
-        // When
-        val result = EditorDocumentUtils.toggleUUIDDashes(UUID_NO_DASH)
-
-        // Then
-        assertThat(result).isEqualTo(DEFAULT_UUID)
+        assertThat(result).isEqualTo("71bc4adb1b7c4827940cf1c53a3f7766")
     }
 
     @Test
     fun `should throw invalid format exception for invalid uuid`() {
 
         assertThat {
-            EditorDocumentUtils.toggleUUIDDashes("f2280785 0824c8baeffbb852eb98783")
+            EditorDocumentUtils.toggleUUIDDashes("71bc4adb 1b7c-4827-940c-f1c53a3f7766")
         }
             .thrownError {
                 isInstanceOf(InvalidFormatException::class)
+                hasMessage("71bc4adb 1b7c-4827-940c-f1c53a3f7766 is not a valid uuid format")
             }
     }
 
