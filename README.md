@@ -17,3 +17,25 @@
 ## JetBrains plugin
 
 Link to the official plugin page : [UUID Generator](https://plugins.jetbrains.com/plugin/8320-uuid-generator)
+
+## Screenshots
+
+* Random UUID
+
+![](./screenshots/generate_random_uuid.png)
+
+* Multi-caret support
+
+![](./screenshots/multi_caret_support.png)
+
+* Toggle dashes
+
+![](./screenshots/toggle_dashes.png)
+
+* UUID to clipboard
+
+![](./screenshots/uuid_to_clipboard.jpg)
+
+* UUID format settings dialogue
+
+![](./screenshots/uuid_settings_dialogue.png)
