@@ -1,3 +1,8 @@
+<div align="center">
+    <a href="https://plugins.jetbrains.com/plugin/8320-uuid-generator">
+        <img src="./src/main/resources/META-INF/pluginIcon.svg" width="320" height="320" alt="logo"></img>
+    </a>
+</div>
 <h1 align="center">Intellij UUID Generator</h1>
 <p align="center">UUID generator plugin for IntelliJ based IDEs.</p>
 
