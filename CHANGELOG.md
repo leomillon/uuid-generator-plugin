@@ -1,5 +1,19 @@
 # Changelog of UUID Generator Plugin
 
+## Unreleased
+### No issue
+
+**Set version to 3.1.0**
+
+
+[5b0e58d4be3cbbf](https://github.com/leomillon/uuid-generator-plugin/commit/5b0e58d4be3cbbf) Léo Millon *2019-06-10 15:33:54*
+
+**Update screenshots, changelog and version**
+
+
+[d40623f0d346667](https://github.com/leomillon/uuid-generator-plugin/commit/d40623f0d346667) Léo Millon *2019-06-10 15:30:37*
+
+
 ## 3.1.0-BETA1
 ### GitHub [#11](https://github.com/leomillon/uuid-generator-plugin/issues/11) UUID Generator Popup    *enhancement*  
 
