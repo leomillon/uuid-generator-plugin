@@ -62,9 +62,9 @@ class UUIDGeneratorSettingsForm {
 
     fun component(): JComponent? = panel
 
-    fun isLowerCased() = lowerCaseRadioButton?.isSelected
-    fun isWithDashes() = withDashesRadioButton?.isSelected
-    fun isLongSize() = longSizeRadioButton?.isSelected
+    private fun isLowerCased() = lowerCaseRadioButton?.isSelected
+    private fun isWithDashes() = withDashesRadioButton?.isSelected
+    private fun isLongSize() = longSizeRadioButton?.isSelected
 
     val isModified: Boolean
         get() = (isLowerCased() != settings.lowerCased

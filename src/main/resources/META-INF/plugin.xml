@@ -15,6 +15,7 @@
       <ul>
         <li>Random UUID</li>
         <li>Generate UUID to clipboard</li>
+        <li>Generate UUID Popup</li>
         <li>Toggle UUID dashes</li>
       </ul>
       <p>
@@ -59,14 +60,18 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <applicationConfigurable instance="com.github.leomillon.uuidgenerator.settings.UUIDGeneratorConfigurable"/>
+
     <applicationService serviceInterface="com.github.leomillon.uuidgenerator.settings.UUIDGeneratorSettings"
                         serviceImplementation="com.github.leomillon.uuidgenerator.settings.UUIDGeneratorSettings"/>
+
+    <applicationService serviceInterface="com.github.leomillon.uuidgenerator.popup.UUIDGeneratorPopupSettings"
+                        serviceImplementation="com.github.leomillon.uuidgenerator.popup.UUIDGeneratorPopupSettings"/>
   </extensions>
 
   <actions>
     <!-- Add your actions here -->
     <action id="uuidgenerator.random" class="com.github.leomillon.uuidgenerator.GenerateRandomAction" text="Random UUID"
-            description="Generate an universally unique identifier (UUID)">
+            description="Generate a universally unique identifier (UUID)">
       <add-to-group group-id="GenerateGroup" anchor="last"/>
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt U" />
     </action>
@@ -74,6 +79,11 @@
             description="Generate a new UUID to clipboard">
       <add-to-group group-id="GenerateGroup" />
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt C" />
+    </action>
+    <action id="uuidgenerator.on-demand-popup" class="com.github.leomillon.uuidgenerator.GeneratePopupAction" text="Generate UUID Popup"
+            description="Show the UUID generator Popup">
+      <add-to-group group-id="GenerateGroup" />
+      <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U" second-keystroke="shift meta alt P" />
     </action>
     <action id="uuidgenerator.toggle-dashes" class="com.github.leomillon.uuidgenerator.ToggleDashesAction" text="Toggle UUID dashes"
             description="Toggle the dashes of a valid UUID">

@@ -11,19 +11,19 @@ object UUIDGenerator {
         return formatUUID(UUID.randomUUID(), settings)
     }
 
-    fun formatUUID(id: UUID, generatorSettings: UUIDGeneratorSettings): String {
+    fun formatUUID(id: UUID, generatorSettings: UUIDFormatSettings): String {
 
         var formattedId = id.toString()
 
-        if (!generatorSettings.longSize) {
+        if (!generatorSettings.isLongSize()) {
             formattedId = formattedId.substringBefore('-')
         }
 
-        if (!generatorSettings.lowerCased) {
+        if (!generatorSettings.isLowerCased()) {
             formattedId = formattedId.toUpperCase()
         }
 
-        if (!generatorSettings.withDashes) {
+        if (!generatorSettings.isWithDashes()) {
             formattedId = formattedId.replace("-", "")
         }
 

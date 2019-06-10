@@ -1,4 +1,4 @@
-package com.github.leomillon.uuidgenerator.settings
+package com.github.leomillon.uuidgenerator.popup
 
 import com.github.leomillon.uuidgenerator.UUIDFormatSettings
 import com.intellij.openapi.components.PersistentStateComponent
@@ -8,15 +8,13 @@ import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
 import org.jetbrains.annotations.Nullable
 
-@State(name = "UUIDGeneratorSettings", storages = [(Storage("uuid_generator.xml"))])
-class UUIDGeneratorSettings : PersistentStateComponent<UUIDGeneratorSettings>, UUIDFormatSettings {
+@State(name = "UUIDGeneratorPopupSettings", storages = [(Storage("uuid_popup.xml"))])
+class UUIDGeneratorPopupSettings : PersistentStateComponent<UUIDGeneratorPopupSettings>, UUIDFormatSettings {
 
     companion object {
-        val instance: UUIDGeneratorSettings
-            get() = ServiceManager.getService(UUIDGeneratorSettings::class.java)
+        val instance: UUIDGeneratorPopupSettings
+            get() = ServiceManager.getService(UUIDGeneratorPopupSettings::class.java)
     }
-
-    var version = "Unknown"
 
     /**
      * Default values
@@ -24,11 +22,15 @@ class UUIDGeneratorSettings : PersistentStateComponent<UUIDGeneratorSettings>, U
     var lowerCased = true
     var withDashes = true
     var longSize = true
+    var numberFieldValue = 1
+    var separatorFieldValue = "\\n"
+    var prefixFieldValue = ""
+    var suffixFieldValue = ""
 
     @Nullable
     override fun getState() = this
 
-    override fun loadState(state: UUIDGeneratorSettings) {
+    override fun loadState(state: UUIDGeneratorPopupSettings) {
         XmlSerializerUtil.copyBean(state, this)
     }
 
