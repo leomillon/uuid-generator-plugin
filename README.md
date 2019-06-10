@@ -24,6 +24,10 @@ Link to the official plugin page : [UUID Generator](https://plugins.jetbrains.co
 
 ![](./screenshots/generate_random_uuid.png)
 
+* UUID Generate Popup
+
+![](./screenshots/generate_popup.png)
+
 * Multi-caret support
 
 ![](./screenshots/multi_caret_support.png)
