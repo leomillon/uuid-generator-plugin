@@ -3,7 +3,7 @@ package com.github.leomillon.uuidgenerator
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.matches
-import com.github.leomillon.uuidgenerator.settings.UUIDGeneratorSettings
+import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -87,7 +87,11 @@ class UUIDGeneratorTest {
             )
         )
 
-        private fun settings(lowerCased: Boolean = true, withDashes: Boolean = true, longSize: Boolean = true): UUIDGeneratorSettings {
+        private fun settings(
+            lowerCased: Boolean = true,
+            withDashes: Boolean = true,
+            longSize: Boolean = true
+        ): UUIDGeneratorSettings {
             val settings = UUIDGeneratorSettings()
             settings.lowerCased = lowerCased
             settings.withDashes = withDashes
@@ -98,8 +102,10 @@ class UUIDGeneratorTest {
 
     @ParameterizedTest
     @MethodSource("expectedValuesBySettings")
-    fun `should format uuid for settings`(settings: UUIDGeneratorSettings,
-                                          expectedId: String) {
+    fun `should format uuid for settings`(
+        settings: UUIDGeneratorSettings,
+        expectedId: String
+    ) {
         val id = UUID.fromString("71bc4adb-1b7c-4827-940c-f1c53a3f7766")
 
         assertThat(UUIDGenerator.formatUUID(id, settings))
@@ -108,8 +114,10 @@ class UUIDGeneratorTest {
 
     @ParameterizedTest
     @MethodSource("expectedRegexBySettings")
-    fun `should generate uuid for settings`(settings: UUIDGeneratorSettings,
-                                            expectedIdRegex: Regex) {
+    fun `should generate uuid for settings`(
+        settings: UUIDGeneratorSettings,
+        expectedIdRegex: Regex
+    ) {
         assertThat(UUIDGenerator.generateUUID(settings))
             .matches(expectedIdRegex)
     }
