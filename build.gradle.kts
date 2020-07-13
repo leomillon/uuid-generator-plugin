@@ -4,9 +4,9 @@ import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 
 plugins {
     idea
-    kotlin("jvm") version "1.3.31"
-    id("org.jetbrains.intellij") version "0.4.8"
-    id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.60"
+    kotlin("jvm") version "1.3.72"
+    id("org.jetbrains.intellij") version "0.4.21"
+    id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.64"
 }
 
 intellij {
@@ -24,8 +24,8 @@ tasks.withType<KotlinCompile> {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
-    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.16")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.22")
 }
 
 tasks.withType<Test> {

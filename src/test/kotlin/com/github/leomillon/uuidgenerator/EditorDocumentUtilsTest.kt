@@ -1,10 +1,9 @@
 package com.github.leomillon.uuidgenerator
 
 import assertk.assertThat
-import assertk.assertions.hasMessage
 import assertk.assertions.isEqualTo
-import assertk.assertions.isInstanceOf
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -62,13 +61,10 @@ class EditorDocumentUtilsTest {
     @Test
     fun `should throw invalid format exception for invalid uuid`() {
 
-        assertThat {
+        val error = assertThrows<InvalidFormatException> {
             EditorDocumentUtils.toggleUUIDDashes("71bc4adb 1b7c-4827-940c-f1c53a3f7766")
         }
-            .thrownError {
-                isInstanceOf(InvalidFormatException::class)
-                hasMessage("71bc4adb 1b7c-4827-940c-f1c53a3f7766 is not a valid uuid format")
-            }
+        assertThat(error.message).isEqualTo("71bc4adb 1b7c-4827-940c-f1c53a3f7766 is not a valid uuid format")
     }
 
 }
