@@ -10,7 +10,8 @@ plugins {
 }
 
 intellij {
-    version = "IC-2018.3" //IntelliJ IDEA 2018.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
+    version =
+        "IC-2018.3" //IntelliJ IDEA 2018.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
     pluginName = "UUID Generator"
     updateSinceUntilBuild = false //Disables updating since-build attribute in plugin.xml
 }
@@ -24,6 +25,8 @@ tasks.withType<KotlinCompile> {
 }
 
 dependencies {
+    implementation("com.github.f4b6a3:ulid-creator:2.0.2")
+
     testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.22")
 }

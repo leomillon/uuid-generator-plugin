@@ -1,6 +1,7 @@
 package com.github.leomillon.uuidgenerator.settings
 
 import com.github.leomillon.uuidgenerator.UUIDGenerator
+import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
 import java.util.*
 import javax.swing.JComponent
 import javax.swing.JLabel
@@ -49,7 +50,8 @@ class UUIDGeneratorSettingsForm {
     }
 
     private fun updatePreview() {
-        val previewSettings = UUIDGeneratorSettings()
+        val previewSettings =
+            UUIDGeneratorSettings()
         applyToSettings(previewSettings)
         previewValue?.text = UUIDGenerator.formatUUID(uuidPreview, previewSettings)
     }

@@ -1,5 +1,6 @@
-package com.github.leomillon.uuidgenerator
+package com.github.leomillon.uuidgenerator.action
 
+import com.github.leomillon.uuidgenerator.DisplayMessageUtils
 import com.github.leomillon.uuidgenerator.popup.GeneratePopup
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -12,13 +13,13 @@ import com.intellij.util.ui.TextTransferable
  *
  * @author Léo Millon
  */
-class GeneratePopupAction : AnAction() {
+abstract class GeneratePopupAction : AnAction() {
 
     override fun actionPerformed(anActionEvent: AnActionEvent) {
 
         val project = anActionEvent.getData(CommonDataKeys.PROJECT)
 
-        val generatePopup = GeneratePopup()
+        val generatePopup = createPopup()
 
         if (!generatePopup.showAndGet()) return
 
@@ -28,9 +29,15 @@ class GeneratePopupAction : AnAction() {
                 CopyPasteManager.getInstance().setContents(this)
                 project
                     ?.run {
-                        DisplayMessageUtils.displayMessage("Copied to clipboard", this, fadeoutTime = 2000)
+                        DisplayMessageUtils.displayMessage(
+                            "Copied to clipboard",
+                            this,
+                            fadeoutTime = 2000
+                        )
                     }
                 generatePopup.saveSettings()
             }
     }
+
+    abstract fun createPopup(): GeneratePopup
 }

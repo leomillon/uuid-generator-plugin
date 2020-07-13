@@ -1,6 +1,6 @@
-package com.github.leomillon.uuidgenerator.popup
+package com.github.leomillon.uuidgenerator.popup.uuid
 
-import com.github.leomillon.uuidgenerator.UUIDFormatSettings
+import com.github.leomillon.uuidgenerator.settings.uuid.UUIDFormatSettings
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
@@ -9,7 +9,8 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 import org.jetbrains.annotations.Nullable
 
 @State(name = "UUIDGeneratorPopupSettings", storages = [(Storage("uuid_popup.xml"))])
-class UUIDGeneratorPopupSettings : PersistentStateComponent<UUIDGeneratorPopupSettings>, UUIDFormatSettings {
+class UUIDGeneratorPopupSettings : PersistentStateComponent<UUIDGeneratorPopupSettings>,
+    UUIDFormatSettings {
 
     companion object {
         val instance: UUIDGeneratorPopupSettings

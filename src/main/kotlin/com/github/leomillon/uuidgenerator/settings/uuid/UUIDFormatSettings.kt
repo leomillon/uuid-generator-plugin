@@ -1,4 +1,4 @@
-package com.github.leomillon.uuidgenerator
+package com.github.leomillon.uuidgenerator.settings.uuid
 
 interface UUIDFormatSettings {
 

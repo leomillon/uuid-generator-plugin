@@ -1,16 +1,17 @@
-package com.github.leomillon.uuidgenerator
+package com.github.leomillon.uuidgenerator.action
 
+import com.github.leomillon.uuidgenerator.EditorDocumentUtils
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.command.WriteCommandAction
 
 /**
- * A random UUID generator action.
+ * A random ID generator action.
  *
  * @author Léo Millon
  */
-class GenerateRandomAction : AnAction() {
+abstract class GenerateRandomAction : AnAction() {
 
     override fun actionPerformed(anActionEvent: AnActionEvent) {
         val project = anActionEvent.getData(CommonDataKeys.PROJECT)
@@ -25,8 +26,13 @@ class GenerateRandomAction : AnAction() {
             editor.caretModel
                 .allCarets
                 .forEach {
-                    EditorDocumentUtils.insertTextAtCaret(it, UUIDGenerator.generateUUID())
+                    EditorDocumentUtils.insertTextAtCaret(
+                        it,
+                        generateId()
+                    )
                 }
         }
     }
+
+    abstract fun generateId(): String
 }

@@ -1,4 +1,4 @@
-package com.github.leomillon.uuidgenerator
+package com.github.leomillon.uuidgenerator.action
 
 import com.github.leomillon.uuidgenerator.DisplayMessageUtils.Companion.displayMessage
 import com.intellij.openapi.actionSystem.AnAction
@@ -8,25 +8,27 @@ import com.intellij.openapi.ide.CopyPasteManager
 import com.intellij.util.ui.TextTransferable
 
 /**
- * Action that generate a UUID into clipboard.
+ * Action that generate an ID into clipboard.
  *
  * @author Léo Millon
  */
-class GenerateToClipboardAction : AnAction() {
+abstract class GenerateToClipboardAction : AnAction() {
 
     override fun actionPerformed(anActionEvent: AnActionEvent) {
 
-        val generatedUuid = UUIDGenerator.generateUUID()
+        val generatedId = generateId()
 
-        toClipboard(generatedUuid)
+        toClipboard(generatedId)
 
         anActionEvent.getData(CommonDataKeys.PROJECT)
             ?.run {
-                displayMessage("$generatedUuid copied to clipboard.", this, fadeoutTime = 2000)
+                displayMessage("$generatedId copied to clipboard.", this, fadeoutTime = 2000)
             }
     }
 
     private fun toClipboard(text: String) {
         CopyPasteManager.getInstance().setContents(TextTransferable(text))
     }
+
+    abstract fun generateId(): String
 }
