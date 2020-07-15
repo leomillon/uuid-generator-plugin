@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.github.leomillon.uuidgenerator</id>
     <name>UUID Generator</name>
-    <version>3.2.0-SNAPSHOT</version>
+    <version>3.2.0-BETA1</version>
     <vendor email="millon.leo@gmail.com" url="https://github.com/leomillon">Léo Millon (@leo_millon)</vendor>
 
     <description><![CDATA[
@@ -19,34 +19,34 @@
         <li>Toggle UUID dashes</li>
       </ul>
       <p>
-        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/master/screenshots/generate_random_uuid.png"
+        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/3.2.0-BETA1/screenshots/generate_random_uuid.png"
                  border="0" width="500" height="72" alt="generate_random_uuid"/></p>
       </p>
       <p>
-        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/master/screenshots/generate_popup.png"
+        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/3.2.0-BETA1/screenshots/generate_popup.png"
                  border="0" width="500" height="285" alt="generate_popup"/></p>
       </p>
       <p>
-        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/master/screenshots/multi_caret_support.png"
+        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/3.2.0-BETA1/screenshots/multi_caret_support.png"
                  border="0" width="500" height="171" alt="multi_caret_support"/></p>
       </p>
       <p>
-        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/master/screenshots/toggle_dashes.png"
+        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/3.2.0-BETA1/screenshots/toggle_dashes.png"
                  border="0" width="500" height="162" alt="toggle_dashes"/></p>
       </p>
       <p>
-        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/master/screenshots/uuid_to_clipboard.jpg"
+        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/3.2.0-BETA1/screenshots/uuid_to_clipboard.jpg"
                  border="0" width="500" height="101" alt="uuid_to_clipboard"/></p>
       </p>
       <p>
-        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/master/screenshots/uuid_settings_dialogue.png"
+        <img src="https://raw.githubusercontent.com/leomillon/uuid-generator-plugin/3.2.0-BETA1/screenshots/uuid_settings_dialogue.png"
                  border="0" width="500" height="369" alt="uuid_settings_dialogue"/></p>
       </p>
       ]]>
     </description>
 
     <change-notes><![CDATA[
-        <b>Changes in version 3.2.0:</b>
+        <b>Changes in version 3.2.0-BETA1:</b>
         <ul>
             <li>
               Add ULID generator features
