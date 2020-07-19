@@ -1,6 +1,33 @@
 # Changelog of UUID Generator Plugin
 
-## Unreleased
+## 3.2.0
+### GitHub [#13](https://github.com/leomillon/uuid-generator-plugin/issues/13) ULID feature request    *enhancement*  
+
+**feat(ULID): Add ULID actions (#13)**
+
+
+[60ff95693097d04](https://github.com/leomillon/uuid-generator-plugin/commit/60ff95693097d04) Léo Millon *2020-07-19 11:06:11*
+
+
+### No issue
+
+**chore: Set version to 3.2.0**
+
+
+[7c35f092f65b1ea](https://github.com/leomillon/uuid-generator-plugin/commit/7c35f092f65b1ea) Léo Millon *2020-07-19 11:14:31*
+
+**chore(deps): Upgrade dependencies to last versions**
+
+
+[a9921f49c386732](https://github.com/leomillon/uuid-generator-plugin/commit/a9921f49c386732) Léo Millon *2020-07-13 09:10:28*
+
+**Set version to 3.2.0-SNAPSHOT**
+
+
+[2300056fce34370](https://github.com/leomillon/uuid-generator-plugin/commit/2300056fce34370) Léo Millon *2019-06-10 15:50:38*
+
+
+## 3.1.0
 ### No issue
 
 **Set version to 3.1.0**
