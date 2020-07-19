@@ -1,14 +1,19 @@
 package com.github.leomillon.uuidgenerator
 
-import com.github.leomillon.uuidgenerator.settings.UUIDGeneratorSettings
+import com.github.leomillon.uuidgenerator.settings.uuid.UUIDFormatSettings
+import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
 import java.util.*
 
 object UUIDGenerator {
 
-    fun generateUUID() = generateUUID(UUIDGeneratorSettings.instance)
+    fun generateUUID() =
+        generateUUID(UUIDGeneratorSettings.instance)
 
     fun generateUUID(settings: UUIDGeneratorSettings): String {
-        return formatUUID(UUID.randomUUID(), settings)
+        return formatUUID(
+            UUID.randomUUID(),
+            settings
+        )
     }
 
     fun formatUUID(id: UUID, generatorSettings: UUIDFormatSettings): String {

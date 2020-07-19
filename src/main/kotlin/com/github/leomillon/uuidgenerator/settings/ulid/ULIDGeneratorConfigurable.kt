@@ -1,16 +1,17 @@
-package com.github.leomillon.uuidgenerator.settings
+package com.github.leomillon.uuidgenerator.settings.ulid
 
+import com.github.leomillon.uuidgenerator.settings.ULIDGeneratorSettingsForm
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.ConfigurationException
 import org.jetbrains.annotations.Nls
 import javax.swing.JComponent
 
-class UUIDGeneratorConfigurable : Configurable {
+class ULIDGeneratorConfigurable : Configurable {
 
-    var settingsForm: UUIDGeneratorSettingsForm? = null
+    var settingsForm: ULIDGeneratorSettingsForm? = null
 
     override fun createComponent(): JComponent? {
-        settingsForm = settingsForm ?: UUIDGeneratorSettingsForm()
+        settingsForm = settingsForm ?: ULIDGeneratorSettingsForm()
         return settingsForm?.component()
     }
 
@@ -20,7 +21,8 @@ class UUIDGeneratorConfigurable : Configurable {
 
     @Throws(ConfigurationException::class)
     override fun apply() {
-        val settings = UUIDGeneratorSettings.instance
+        val settings =
+            ULIDGeneratorSettings.instance
         settingsForm?.applyToSettings(settings)
     }
 
@@ -33,6 +35,6 @@ class UUIDGeneratorConfigurable : Configurable {
     }
 
     @Nls
-    override fun getDisplayName() = "UUID Generator"
+    override fun getDisplayName() = "ULID Generator"
 
 }

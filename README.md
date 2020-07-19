@@ -4,7 +4,7 @@
     </a>
 </div>
 <h1 align="center">Intellij UUID Generator</h1>
-<p align="center">UUID generator plugin for IntelliJ based IDEs.</p>
+<p align="center"><a href="https://tools.ietf.org/html/rfc4122">UUID</a> and <a href="https://github.com/ulid/spec">ULID</a> generator plugin for IntelliJ based IDEs.</p>
 
 <p align="center">
     <a href="https://travis-ci.org/leomillon/uuid-generator-plugin"><img src="https://travis-ci.org/leomillon/uuid-generator-plugin.svg?branch=master"></a>

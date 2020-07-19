@@ -1,6 +1,5 @@
-package com.github.leomillon.uuidgenerator.settings
+package com.github.leomillon.uuidgenerator.settings.uuid
 
-import com.github.leomillon.uuidgenerator.UUIDFormatSettings
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
@@ -9,7 +8,8 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 import org.jetbrains.annotations.Nullable
 
 @State(name = "UUIDGeneratorSettings", storages = [(Storage("uuid_generator.xml"))])
-class UUIDGeneratorSettings : PersistentStateComponent<UUIDGeneratorSettings>, UUIDFormatSettings {
+class UUIDGeneratorSettings : PersistentStateComponent<UUIDGeneratorSettings>,
+    UUIDFormatSettings {
 
     companion object {
         val instance: UUIDGeneratorSettings

@@ -1,7 +1,7 @@
 package com.github.leomillon.uuidgenerator.settings
 
 import com.github.leomillon.uuidgenerator.UUIDGenerator
-import com.github.leomillon.uuidgenerator.popup.UUIDGeneratorPopupSettings
+import com.github.leomillon.uuidgenerator.popup.uuid.UUIDGeneratorPopupSettings
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import java.util.*
@@ -84,7 +84,8 @@ class UUIDGeneratorPopupForm {
     }
 
     private fun updatePreview() {
-        val previewSettings = UUIDGeneratorPopupSettings()
+        val previewSettings =
+            UUIDGeneratorPopupSettings()
         applyToSettings(previewSettings)
 
         val result = currentIds.joinToString(

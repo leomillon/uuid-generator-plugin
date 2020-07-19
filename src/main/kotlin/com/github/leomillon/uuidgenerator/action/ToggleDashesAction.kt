@@ -1,5 +1,8 @@
-package com.github.leomillon.uuidgenerator
+package com.github.leomillon.uuidgenerator.action
 
+import com.github.leomillon.uuidgenerator.DisplayMessageUtils
+import com.github.leomillon.uuidgenerator.EditorDocumentUtils
+import com.github.leomillon.uuidgenerator.InvalidFormatException
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -42,7 +45,11 @@ class ToggleDashesAction : AnAction() {
         messages.asSequence()
             .joinToString(separator = "<br>")
             .run {
-                DisplayMessageUtils.displayMessage(this, project, type = MessageType.ERROR)
+                DisplayMessageUtils.displayMessage(
+                    this,
+                    project,
+                    type = MessageType.ERROR
+                )
             }
     }
 
@@ -51,7 +58,10 @@ class ToggleDashesAction : AnAction() {
             caret.selectedText
                 ?.takeIf { it.isNotBlank() }
                 ?.run {
-                    EditorDocumentUtils.insertTextAtCaret(caret, EditorDocumentUtils.toggleUUIDDashes(this))
+                    EditorDocumentUtils.insertTextAtCaret(
+                        caret,
+                        EditorDocumentUtils.toggleUUIDDashes(this)
+                    )
                 }
         }
     }
