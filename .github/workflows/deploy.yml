@@ -1,0 +1,60 @@
+name: Deploy plugin
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    env:
+      INTELLIJ_PUBLISH_TOKEN: ${{ secrets.INTELLIJ_PUBLISH_TOKEN }}
+      PLUGING_ASSETS_FOLDER: build/distributions/*
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup java
+        uses: actions/setup-java@v1.4.1
+        with:
+          java-version: 1.8
+      - name: Get tag value
+        id: get-tag-value
+        run: echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//}
+      - name: Check tag
+        id: check-tag
+        run: |
+          if [[ "${VERSION}" =~ ^([0-9])+\.([0-9])+(\.([0-9])+)*(-[a-zA-Z0-9]+)*-BETA.*$ ]]; then
+              echo ::set-output name=tag-type::BETA
+          elif [[ "${VERSION}" =~ ^([0-9])+\.([0-9])+(\.([0-9])+)*(-[a-zA-Z0-9]+)*$ ]]; then
+              echo ::set-output name=tag-type::RELEASE
+          else
+              echo "Invalid version"
+              exit 1
+          fi
+        env:
+          VERSION: ${{ steps.get-tag-value.outputs.tag }}
+      - name: Deploy BETA
+        if: steps.check-tag.outputs.tag-type == 'BETA'
+        run: |
+          ./gradlew clean check publishPlugin -PdownloadIdeaSources=false -PintellijPublishToken="${INTELLIJ_PUBLISH_TOKEN}" -PintellijPublishChannels="beta"
+      - name: Deploy RELEASE
+        if: steps.check-tag.outputs.tag-type == 'RELEASE'
+        run: |
+          ./gradlew clean check publishPlugin -PdownloadIdeaSources=false -PintellijPublishToken="${INTELLIJ_PUBLISH_TOKEN}"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "uuid-generator-${{ steps.get-tag-value.outputs.tag }}"
+          path: ${{ env.PLUGING_ASSETS_FOLDER }}
+      - name: Create Github release
+        run: |
+          set -x
+          assets=()
+          for asset in ${ASSETS_FOLDER}; do
+            assets+=("-a" "$asset")
+          done
+          hub release create --draft "${assets[@]}" -m "Release of ${VERSION}" "${VERSION}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.get-tag-value.outputs.tag }}
+          ASSETS_FOLDER: ${{ env.PLUGING_ASSETS_FOLDER }}
