@@ -11,6 +11,7 @@
     <a href="https://github.com/leomillon/uuid-generator-plugin/releases"><img src="https://img.shields.io/github/release/leomillon/uuid-generator-plugin/all.svg"></a>
     <a href="https://github.com/leomillon/uuid-generator-plugin/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/leomillon/uuid-generator-plugin.svg"></a>
     <a href="https://plugins.jetbrains.com/plugin/8320-uuid-generator"><img src="https://img.shields.io/jetbrains/plugin/v/8320-uuid-generator.svg"></a>
+    <a href="https://plugins.jetbrains.com/plugin/8320-uuid-generator"><img src="https://img.shields.io/jetbrains/plugin/r/stars/8320"></a>
     <a href="https://plugins.jetbrains.com/plugin/8320-uuid-generator"><img src="https://img.shields.io/jetbrains/plugin/d/8320-uuid-generator.svg"></a>
 </p>
 
