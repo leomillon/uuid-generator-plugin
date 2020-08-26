@@ -1,10 +1,16 @@
 package com.github.leomillon.uuidgenerator
 
+import com.github.leomillon.uuidgenerator.parser.ULIDParser
+import com.github.leomillon.uuidgenerator.parser.UUIDParser
+import com.github.leomillon.uuidgenerator.parser.UUID_LONG_REGEX
+import com.github.leomillon.uuidgenerator.settings.ulid.ULIDFormatSettings
+import com.github.leomillon.uuidgenerator.settings.uuid.UUIDFormatSettings
+import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
 import com.intellij.openapi.editor.Caret
+import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.util.TextRange
 
 object EditorDocumentUtils {
-
-    private val UUID_REGEX = "([0-9a-zA-Z]{8})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{12})".toRegex()
 
     fun insertTextAtCaret(caret: Caret, text: CharSequence) {
         val textLength = text.length
@@ -24,12 +30,37 @@ object EditorDocumentUtils {
         caret.moveToOffset(start + textLength)
     }
 
-    fun toggleUUIDDashes(text: String): String {
+    fun replaceTextAtRange(editor: Editor, range: TextRange, text: CharSequence) {
+        editor.document.replaceString(range.startOffset, range.endOffset, text)
+    }
 
-        if (!UUID_REGEX.matches(text)) {
-            throw InvalidFormatException("$text is not a valid uuid format")
+    fun reformatUUID(text: String): String = reformatUUID(text, UUIDGeneratorSettings.instance)
+
+    private fun reformatUUID(id: String, generatorSettings: UUIDFormatSettings): String {
+
+        var formattedId = id
+
+        if (!generatorSettings.isLongSize() && !UUIDParser(formattedId).isShort()) {
+            formattedId = formattedId.substringBefore('-')
         }
 
+        formattedId = if (generatorSettings.isLowerCased()) {
+            formattedId.toLowerCase()
+        } else {
+            formattedId.toUpperCase()
+        }
+
+        formattedId = when {
+            generatorSettings.isWithDashes() && !formattedId.contains("-") -> insertDashes(formattedId)
+            !generatorSettings.isWithDashes() && formattedId.contains("-") -> removeDashes(formattedId)
+            else -> formattedId
+        }
+
+        return formattedId
+    }
+
+    fun toggleUUIDDashes(text: String): String {
+        UUIDParser(text).assertValid()
         return if (text.contains("-")) removeDashes(text) else insertDashes(text)
     }
 
@@ -39,7 +70,7 @@ object EditorDocumentUtils {
 
     private fun insertDashes(text: String): String {
 
-        val matcher = UUID_REGEX.toPattern().matcher(text)
+        val matcher = UUID_LONG_REGEX.toPattern().matcher(text)
 
         matcher.find()
         return (1..matcher.groupCount())

@@ -24,7 +24,7 @@ abstract class GeneratePopupAction : AnAction() {
         if (!generatePopup.showAndGet()) return
 
         generatePopup.getOutput()
-            ?.let { TextTransferable(it) }
+            ?.let { TextTransferable(it as CharSequence) }
             ?.run {
                 CopyPasteManager.getInstance().setContents(this)
                 project

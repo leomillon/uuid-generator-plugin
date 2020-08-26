@@ -2,12 +2,11 @@ package com.github.leomillon.uuidgenerator
 
 import assertk.assertThat
 import assertk.assertions.matches
+import com.github.leomillon.uuidgenerator.parser.CROCKFORD_BASE32_CHARS
 import com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorSettings
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-
-private const val CROCKFORD_BASE32_CHARS = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 
 class ULIDGeneratorTest {
 

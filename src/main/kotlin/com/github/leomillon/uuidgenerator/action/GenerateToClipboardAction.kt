@@ -26,7 +26,7 @@ abstract class GenerateToClipboardAction : AnAction() {
             }
     }
 
-    private fun toClipboard(text: String) {
+    private fun toClipboard(text: CharSequence) {
         CopyPasteManager.getInstance().setContents(TextTransferable(text))
     }
 

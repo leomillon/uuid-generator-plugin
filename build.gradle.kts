@@ -11,9 +11,14 @@ plugins {
 
 intellij {
     version =
-        "IC-2018.3" //IntelliJ IDEA 2018.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
+        "IC-2020.1" //IntelliJ IDEA 2020.1 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
     pluginName = "UUID Generator"
     updateSinceUntilBuild = false //Disables updating since-build attribute in plugin.xml
+
+    setPlugins(
+        "java",
+        "org.jetbrains.kotlin"
+    )
 }
 
 repositories {
