@@ -21,6 +21,14 @@ Link to the official plugin page : [UUID Generator](https://plugins.jetbrains.co
 
 ## Screenshots
 
+* UUID / ULID highlight
+
+![](./screenshots/ulid_highlight_with_timestamp.png)
+
+* UUID / ULID quick fixes
+
+![](./screenshots/uuid_quick_fixes.png)
+
 * Random UUID
 
 ![](./screenshots/generate_random_uuid.png)
