@@ -34,8 +34,6 @@ class IDAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
                 System.out.println("Here is some UUID : $targetUUID");
                 System.out.println("Here is some ULID : $targetULID");
                 
-                System.out.println("Should not match UUID : 374a2d9fa054474aa7eab92df9bbb734");
-                
                 new FoooooooooooooooooooBaaaaaaaaaaa();
             }
             
