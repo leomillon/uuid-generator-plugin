@@ -5,14 +5,11 @@ import com.github.f4b6a3.ulid.util.UlidValidator
 import com.github.leomillon.uuidgenerator.InvalidFormatException
 import java.time.Instant
 
-const val CROCKFORD_BASE32_CHARS = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
-const val CROCKFORD_BASE32_CHARS_LOWER = "${CROCKFORD_BASE32_CHARS}abcdefghjkmnpqrstvwxyz"
+const val CROCKFORD_BASE32_CHARS_UPPER = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
+const val CROCKFORD_BASE32_CHARS_LOWER = "0123456789abcdefghjkmnpqrstvwxyz"
 
-val ULID_STRING_REGEX =
-    "[${CROCKFORD_BASE32_CHARS_LOWER}]{10}[${CROCKFORD_BASE32_CHARS_LOWER}]{16}".toRegex()
-
-val ULID_GUID_REGEX =
-    "([$CROCKFORD_BASE32_CHARS_LOWER]{8})-([$CROCKFORD_BASE32_CHARS_LOWER]{4})-([0-9a-zA-Z]{4})-([0-9a-zA-Z]{4})-([0-9a-zA-Z]{12})".toRegex()
+val FIND_ULID_REGEX =
+    """(?<![0-9a-zA-Z])([${CROCKFORD_BASE32_CHARS_UPPER}]{26}|[${CROCKFORD_BASE32_CHARS_LOWER}]{26})(?!([0-9a-zA-Z]|\())""".toRegex()
 
 class ULIDParser(
     private val source: String
@@ -30,5 +27,7 @@ class ULIDParser(
     }
 }
 
-fun CharSequence.findULIDs() = (ULID_STRING_REGEX.findAll(this) + ULID_GUID_REGEX.findAll(this))
+fun CharSequence.findULIDs() = FIND_ULID_REGEX.findAll(this)
     .filter { ULIDParser(it.value).isValid() }
+    .filter { it.value.containsAtLeast2Numbers() }
+    .map { it.value to it.range }

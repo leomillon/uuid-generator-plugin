@@ -30,9 +30,8 @@ private fun highlightInText(
     holder: AnnotationHolder
 ) {
     val startOffset = element.textRange.startOffset
-    rawText.findUUIDs().forEach { matchResult ->
-        val textRange = matchResult.textRange(startOffset)
-        val matchingValue = matchResult.value
+    rawText.findUUIDs().forEach { (matchingValue, range) ->
+        val textRange = range.textRange(startOffset)
         holder.newAnnotation(HighlightSeverity.INFORMATION, "UUID")
             .range(textRange)
             .enforcedTextAttributes(DefaultLanguageHighlighterColors.CONSTANT.defaultAttributes)

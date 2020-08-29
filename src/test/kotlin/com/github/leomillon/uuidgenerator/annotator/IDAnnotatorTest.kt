@@ -2,6 +2,7 @@ package com.github.leomillon.uuidgenerator.annotator
 
 import assertk.assertThat
 import assertk.assertions.containsOnly
+import assertk.assertions.hasSize
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotEmpty
 import assertk.assertions.isNotNull
@@ -32,6 +33,15 @@ class IDAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
             public static void main(String[] args) {
                 System.out.println("Here is some UUID : $targetUUID");
                 System.out.println("Here is some ULID : $targetULID");
+                
+                System.out.println("Should not match UUID : 374a2d9fa054474aa7eab92df9bbb734");
+                
+                new FoooooooooooooooooooBaaaaaaaaaaa();
+            }
+            
+            public static class FoooooooooooooooooooBaaaaaaaaaaa {
+                public void someLongMethodNameeeeeeeeeeeeeee() {}
+                public void someotherlongmethodnameeeeeeeeee() {}
             }
         }
         """.trimIndent()
@@ -45,6 +55,8 @@ class IDAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
         assertThat(highlightingResult).isNotEmpty()
         assertUUIDHighlight(highlightingResult, 110, 146)
         assertULIDHighlight(highlightingResult, 198, 224)
+        assertUUIDCount(highlightingResult)
+        assertULIDCount(highlightingResult)
     }
 
     fun `test should annotate UUIDs and ULIDs in Kotlin code`() {
@@ -67,6 +79,8 @@ class IDAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
         assertThat(highlightingResult).isNotEmpty()
         assertUUIDHighlight(highlightingResult, 65, 101)
         assertULIDHighlight(highlightingResult, 137, 163)
+        assertUUIDCount(highlightingResult)
+        assertULIDCount(highlightingResult)
     }
 
     fun `test should annotate UUIDs and ULIDs in JSON code`() {
@@ -88,9 +102,18 @@ class IDAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
         val highlightingResult = myFixture.doHighlighting()
 
         // Then
-        assertThat(highlightingResult).isNotEmpty()
         assertUUIDHighlight(highlightingResult, 18, 54)
         assertULIDHighlight(highlightingResult, 84, 110)
+        assertUUIDCount(highlightingResult)
+        assertULIDCount(highlightingResult)
+    }
+
+    private fun assertUUIDCount(highlightingResult: List<HighlightInfo>) {
+        assertThat(highlightingResult.filter { it.description == "UUID" }).hasSize(1)
+    }
+
+    private fun assertULIDCount(highlightingResult: List<HighlightInfo>) {
+        assertThat(highlightingResult.filter { it.description?.startsWith("ULID") ?: false }).hasSize(1)
     }
 
     private fun assertUUIDHighlight(highlightingResult: List<HighlightInfo>, rangeStart: Int, rangeEnd: Int) {
