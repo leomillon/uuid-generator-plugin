@@ -1,14 +1,14 @@
 package com.github.leomillon.uuidgenerator
 
-import com.github.leomillon.uuidgenerator.parser.ULIDParser
 import com.github.leomillon.uuidgenerator.parser.UUIDParser
-import com.github.leomillon.uuidgenerator.parser.UUID_LONG_REGEX
-import com.github.leomillon.uuidgenerator.settings.ulid.ULIDFormatSettings
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDFormatSettings
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
 import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.util.TextRange
+
+val UUID_LONG_REGEX =
+    """([0-9a-zA-Z]{8})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{12})""".toRegex()
 
 object EditorDocumentUtils {
 

@@ -2,7 +2,7 @@ package com.github.leomillon.uuidgenerator
 
 import assertk.assertThat
 import assertk.assertions.matches
-import com.github.leomillon.uuidgenerator.parser.CROCKFORD_BASE32_CHARS
+import com.github.leomillon.uuidgenerator.parser.CROCKFORD_BASE32_CHARS_UPPER
 import com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorSettings
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -17,7 +17,7 @@ class ULIDGeneratorTest {
         fun expectedRegexBySettings() = listOf(
             Arguments.of(
                 ULIDGeneratorSettings(),
-                "[${CROCKFORD_BASE32_CHARS}]{26}".toRegex()
+                "[${CROCKFORD_BASE32_CHARS_UPPER}]{26}".toRegex()
             ),
             Arguments.of(
                 settings(lowerCased = true),

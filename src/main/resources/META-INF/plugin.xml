@@ -56,6 +56,12 @@
     </description>
 
     <change-notes><![CDATA[
+        <b>Changes in version 4.0.1:</b>
+        <ul>
+            <li>
+              Fix: More strict UUID and ULID detection
+            </li>
+        </ul>
         <b>Changes in version 4.0.0:</b>
         <ul>
             <li>

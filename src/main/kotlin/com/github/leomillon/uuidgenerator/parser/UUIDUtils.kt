@@ -1,12 +1,19 @@
 package com.github.leomillon.uuidgenerator.parser
 
 import com.github.leomillon.uuidgenerator.InvalidFormatException
-import com.intellij.openapi.util.TextRange
 
-val UUID_LONG_REGEX =
-    "([0-9a-zA-Z]{8})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{12})".toRegex()
+private const val UUID_CHARS_LOWER = "0123456789abcdef"
+private const val UUID_CHARS_UPPER = "0123456789ABCDEF"
 
-val UUID_SHORT_REGEX =
+private val UUID_LONG_LOWER_REGEX =
+    """([${UUID_CHARS_LOWER}]{8})-?([${UUID_CHARS_LOWER}]{4})-?([${UUID_CHARS_LOWER}]{4})-?([${UUID_CHARS_LOWER}]{4})-?([${UUID_CHARS_LOWER}]{12})""".toRegex()
+private val UUID_LONG_UPPER_REGEX =
+    """([${UUID_CHARS_UPPER}]{8})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{12})""".toRegex()
+
+private val FIND_UUID_LONG_REGEX =
+    """(?<![0-9a-zA-Z])(([${UUID_CHARS_LOWER}]{8})-?([${UUID_CHARS_LOWER}]{4})-?([${UUID_CHARS_LOWER}]{4})-?([${UUID_CHARS_LOWER}]{4})-?([${UUID_CHARS_LOWER}]{12})|([${UUID_CHARS_UPPER}]{8})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{12}))(?!([0-9a-zA-Z]|\())""".toRegex()
+
+private val UUID_SHORT_REGEX =
     "([0-9a-zA-Z]{8})".toRegex()
 
 class UUIDParser(
@@ -19,7 +26,12 @@ class UUIDParser(
             return true
         }
 
-        return UUID_LONG_REGEX.matchEntire(source) != null
+        val length = source.length
+        if (length != 32 && length != 36) {
+            return false
+        }
+
+        return UUID_LONG_LOWER_REGEX.matchEntire(source) != null || UUID_LONG_UPPER_REGEX.matchEntire(source) != null
     }
 
     fun isShort(): Boolean = UUID_SHORT_REGEX.matchEntire(source) != null
@@ -32,11 +44,6 @@ class UUIDParser(
     }
 }
 
-fun CharSequence.findUUIDs() = UUID_LONG_REGEX.findAll(this)
-
-fun MatchResult.textRange(offset: Int = 0) = this.range.let {
-    TextRange(
-        offset + it.first,
-        offset + it.last + 1
-    )
-}
+fun CharSequence.findUUIDs() = FIND_UUID_LONG_REGEX.findAll(this)
+    .filter { it.value.containsAtLeast2Numbers() }
+    .map { it.value to it.range }

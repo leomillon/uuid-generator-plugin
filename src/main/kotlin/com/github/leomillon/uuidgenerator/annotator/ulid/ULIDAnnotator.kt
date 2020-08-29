@@ -30,9 +30,8 @@ private fun highlightInText(
     holder: AnnotationHolder
 ) {
     val startOffset = element.textRange.startOffset
-    rawText.findULIDs().forEach { matchResult ->
-        val textRange = matchResult.textRange(startOffset)
-        val matchingValue = matchResult.value
+    rawText.findULIDs().forEach { (matchingValue, range) ->
+        val textRange = range.textRange(startOffset)
         val ulidParser = ULIDParser(matchingValue)
         val message = when {
             ulidParser.isValid() -> {

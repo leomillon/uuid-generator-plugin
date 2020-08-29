@@ -38,6 +38,11 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    jvmArgs(
+        "-Dspring.test.constructor.autowire.mode=ALL",
+        "-Djunit.jupiter.testinstance.lifecycle.default=per_class",
+        "-Duser.language=en"
+    )
     testLogging {
         events("passed", "skipped", "failed")
     }
