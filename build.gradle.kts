@@ -25,10 +25,6 @@ repositories {
     mavenCentral()
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}
-
 dependencies {
     implementation("com.github.f4b6a3:ulid-creator:2.0.2")
 
@@ -38,35 +34,61 @@ dependencies {
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.22")
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform {
-        includeEngines = setOf("junit-jupiter", "junit-vintage")
-    }
-    jvmArgs(
-        "-Dspring.test.constructor.autowire.mode=ALL",
-        "-Djunit.jupiter.testinstance.lifecycle.default=per_class",
-        "-Duser.language=en"
-    )
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
-}
+tasks {
 
-tasks.withType<PublishTask> {
-    token(prop("intellijPublishToken") ?: "unknown")
-    channels(prop("intellijPublishChannels") ?: "")
-}
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 
-tasks.create("printVersion") {
-    doLast {
+    withType<Test> {
+        useJUnitPlatform {
+            includeEngines = setOf("junit-jupiter", "junit-vintage")
+        }
+        jvmArgs(
+            "-Dspring.test.constructor.autowire.mode=ALL",
+            "-Djunit.jupiter.testinstance.lifecycle.default=per_class",
+            "-Duser.language=en"
+        )
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+    }
+
+    withType<PublishTask> {
+        token(prop("intellijPublishToken") ?: "unknown")
+        channels(prop("intellijPublishChannels") ?: "")
+    }
+
+    patchPluginXml {
+        fun fileInMetaInf(fileName: String) = file("src/main/resources/META-INF").resolve(fileName)
+
+        fun String.replaceGitHubContentUrl(projectVersion: String): String = when {
+            projectVersion.endsWith("-SNAPSHOT") -> "master"
+            else -> projectVersion
+        }
+            .let { targetGitHubBranchName ->
+                this.replace(
+                    "{{GIT_HUB_BRANCH}}",
+                    targetGitHubBranchName
+                )
+            }
+
         val version: String by project
-        println(version)
+        pluginDescription(fileInMetaInf("description.html").readText().replaceGitHubContentUrl(version))
+        changeNotes(fileInMetaInf("change-notes.html").readText())
     }
-}
 
-tasks.create<GitChangelogTask>("gitChangelogTask") {
-    file = File("CHANGELOG.md")
-    templateContent = file("template_changelog.mustache").readText()
+    create("printVersion") {
+        doLast {
+            val version: String by project
+            println(version)
+        }
+    }
+
+    create<GitChangelogTask>("gitChangelogTask") {
+        file = File("CHANGELOG.md")
+        templateContent = file("template_changelog.mustache").readText()
+    }
 }
 
 fun prop(name: String): String? =
