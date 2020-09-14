@@ -4,6 +4,7 @@ import com.github.leomillon.uuidgenerator.parser.ULIDParser
 import com.github.leomillon.uuidgenerator.parser.findULIDs
 import com.github.leomillon.uuidgenerator.parser.textRange
 import com.github.leomillon.uuidgenerator.quickfix.ulid.ULIDRandomQuickFix
+import com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorSettings
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity
@@ -14,6 +15,8 @@ import java.time.ZoneId
 
 class ULIDDefaultAnnotator : Annotator {
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
+
+        if (!ULIDGeneratorSettings.instance.codeHighlighting) return
 
         val rawText = (element as? LeafPsiElement)
             ?.text

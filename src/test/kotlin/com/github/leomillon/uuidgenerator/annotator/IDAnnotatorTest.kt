@@ -7,13 +7,15 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isNotEmpty
 import assertk.assertions.isNotNull
 import com.github.f4b6a3.ulid.util.UlidUtil
+import com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorSettings
+import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.ide.highlighter.JavaFileType
 import com.intellij.json.JsonFileType
 import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.impl.source.tree.injected.changesHandler.range
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase
+import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import org.intellij.lang.annotations.Language
 import org.jetbrains.kotlin.idea.KotlinFileType
 import java.time.ZoneId
@@ -22,7 +24,17 @@ private const val targetUUID = "037d596f-0740-48d5-a5ec-8b4948f9e561"
 private const val targetULID = "01EGNR5DS9WY7VG9YPT0TXDCA5"
 private val ulidDateTime = UlidUtil.extractInstant(targetULID).atZone(ZoneId.systemDefault())
 
-class IDAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
+class IDAnnotatorTest : BasePlatformTestCase() {
+
+    override fun tearDown() {
+        super.tearDown()
+        UUIDGeneratorSettings.instance.also {
+            it.codeHighlighting = true
+        }
+        ULIDGeneratorSettings.instance.also {
+            it.codeHighlighting = true
+        }
+    }
 
     fun `test should annotate UUIDs and ULIDs in Java code`() {
 
@@ -53,8 +65,8 @@ class IDAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
         assertThat(highlightingResult).isNotEmpty()
         assertUUIDHighlight(highlightingResult, 110, 146)
         assertULIDHighlight(highlightingResult, 198, 224)
-        assertUUIDCount(highlightingResult)
-        assertULIDCount(highlightingResult)
+        assertUUIDCount(highlightingResult, 1)
+        assertULIDCount(highlightingResult, 1)
     }
 
     fun `test should annotate UUIDs and ULIDs in Kotlin code`() {
@@ -77,8 +89,8 @@ class IDAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
         assertThat(highlightingResult).isNotEmpty()
         assertUUIDHighlight(highlightingResult, 65, 101)
         assertULIDHighlight(highlightingResult, 137, 163)
-        assertUUIDCount(highlightingResult)
-        assertULIDCount(highlightingResult)
+        assertUUIDCount(highlightingResult, 1)
+        assertULIDCount(highlightingResult, 1)
     }
 
     fun `test should annotate UUIDs and ULIDs in JSON code`() {
@@ -102,16 +114,45 @@ class IDAnnotatorTest : LightJavaCodeInsightFixtureTestCase() {
         // Then
         assertUUIDHighlight(highlightingResult, 18, 54)
         assertULIDHighlight(highlightingResult, 84, 110)
-        assertUUIDCount(highlightingResult)
-        assertULIDCount(highlightingResult)
+        assertUUIDCount(highlightingResult, 1)
+        assertULIDCount(highlightingResult, 1)
     }
 
-    private fun assertUUIDCount(highlightingResult: List<HighlightInfo>) {
-        assertThat(highlightingResult.filter { it.description == "UUID" }).hasSize(1)
+    fun `test should not annotate UUIDs and ULIDs in code if highlighting disabled in settings`() {
+
+        // Given
+        UUIDGeneratorSettings.instance.also {
+            it.codeHighlighting = false
+        }
+        ULIDGeneratorSettings.instance.also {
+            it.codeHighlighting = false
+        }
+        @Language("JSON")
+        val code = """
+        {
+          "someField": "$targetUUID",
+          "someOtherField": [
+            "$targetULID"
+          ]
+        }
+        """.trimIndent()
+        myFixture.configureByText(JsonFileType.INSTANCE, code)
+        PsiDocumentManager.getInstance(project).commitAllDocuments()
+
+        // When
+        val highlightingResult = myFixture.doHighlighting()
+
+        // Then
+        assertUUIDCount(highlightingResult, 0)
+        assertULIDCount(highlightingResult, 0)
     }
 
-    private fun assertULIDCount(highlightingResult: List<HighlightInfo>) {
-        assertThat(highlightingResult.filter { it.description?.startsWith("ULID") ?: false }).hasSize(1)
+    private fun assertUUIDCount(highlightingResult: List<HighlightInfo>, count: Int) {
+        assertThat(highlightingResult.filter { it.description == "UUID" }).hasSize(count)
+    }
+
+    private fun assertULIDCount(highlightingResult: List<HighlightInfo>, count: Int) {
+        assertThat(highlightingResult.filter { it.description?.startsWith("ULID") ?: false }).hasSize(count)
     }
 
     private fun assertUUIDHighlight(highlightingResult: List<HighlightInfo>, rangeStart: Int, rangeEnd: Int) {

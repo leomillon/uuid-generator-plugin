@@ -1,7 +1,6 @@
-package com.github.leomillon.uuidgenerator.settings
+package com.github.leomillon.uuidgenerator.popup.ulid
 
 import com.github.leomillon.uuidgenerator.ULIDGenerator
-import com.github.leomillon.uuidgenerator.popup.ulid.ULIDGeneratorPopupSettings
 import com.github.leomillon.uuidgenerator.settings.ulid.ULIDFormatSettings
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener

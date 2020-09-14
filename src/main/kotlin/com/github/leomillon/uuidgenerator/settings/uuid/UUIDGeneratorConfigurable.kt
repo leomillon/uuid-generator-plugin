@@ -1,6 +1,6 @@
 package com.github.leomillon.uuidgenerator.settings.uuid
 
-import com.github.leomillon.uuidgenerator.settings.UUIDGeneratorSettingsForm
+import com.github.leomillon.uuidgenerator.settings.uuid.form.UUIDGeneratorSettingsForm
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.ConfigurationException
 import org.jetbrains.annotations.Nls

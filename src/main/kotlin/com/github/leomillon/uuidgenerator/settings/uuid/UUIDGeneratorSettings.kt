@@ -24,6 +24,7 @@ class UUIDGeneratorSettings : PersistentStateComponent<UUIDGeneratorSettings>,
     var lowerCased = true
     var withDashes = true
     var longSize = true
+    var codeHighlighting = true
 
     @Nullable
     override fun getState() = this

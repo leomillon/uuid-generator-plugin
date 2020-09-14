@@ -1,8 +1,9 @@
-package com.github.leomillon.uuidgenerator.settings
+package com.github.leomillon.uuidgenerator.settings.uuid.form
 
 import com.github.leomillon.uuidgenerator.UUIDGenerator
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
-import java.util.*
+import java.util.UUID
+import javax.swing.JCheckBox
 import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -20,6 +21,7 @@ class UUIDGeneratorSettingsForm {
     private var withoutDashesRadioButton: JRadioButton? = null
     private var longSizeRadioButton: JRadioButton? = null
     private var shortSizeRadioButton: JRadioButton? = null
+    private var highlightingCheckbox: JCheckBox? = null
 
     private val settings: UUIDGeneratorSettings = UUIDGeneratorSettings.instance
 
@@ -34,6 +36,7 @@ class UUIDGeneratorSettingsForm {
         withoutDashesRadioButton?.isSelected = !settings.withDashes
         longSizeRadioButton?.isSelected = settings.longSize
         shortSizeRadioButton?.isSelected = !settings.longSize
+        highlightingCheckbox?.isSelected = settings.codeHighlighting
 
         sequenceOf(
             lowerCaseRadioButton,
@@ -60,6 +63,7 @@ class UUIDGeneratorSettingsForm {
         settings.lowerCased = isLowerCased() ?: true
         settings.withDashes = isWithDashes() ?: true
         settings.longSize = isLongSize() ?: true
+        settings.codeHighlighting = codeHighlightingEnabled() ?: true
     }
 
     fun component(): JComponent? = panel
@@ -67,9 +71,11 @@ class UUIDGeneratorSettingsForm {
     private fun isLowerCased() = lowerCaseRadioButton?.isSelected
     private fun isWithDashes() = withDashesRadioButton?.isSelected
     private fun isLongSize() = longSizeRadioButton?.isSelected
+    private fun codeHighlightingEnabled() = highlightingCheckbox?.isSelected
 
     val isModified: Boolean
         get() = (isLowerCased() != settings.lowerCased
             || isWithDashes() != settings.withDashes
-            || isLongSize() != settings.longSize)
+            || isLongSize() != settings.longSize
+            || codeHighlightingEnabled() != settings.codeHighlighting)
 }

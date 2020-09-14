@@ -23,6 +23,7 @@ class ULIDGeneratorSettings : PersistentStateComponent<ULIDGeneratorSettings>,
      */
     var lowerCased = false
     var guidFormat = false
+    var codeHighlighting = true
 
     @Nullable
     override fun getState() = this

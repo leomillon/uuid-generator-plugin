@@ -2,9 +2,11 @@ package com.github.leomillon.uuidgenerator.annotator.uuid
 
 import com.github.leomillon.uuidgenerator.parser.findUUIDs
 import com.github.leomillon.uuidgenerator.parser.textRange
+import com.github.leomillon.uuidgenerator.popup.uuid.UUIDGeneratorPopupSettings
 import com.github.leomillon.uuidgenerator.quickfix.uuid.UUIDRandomQuickFix
 import com.github.leomillon.uuidgenerator.quickfix.uuid.UUIDReformatQuickFix
 import com.github.leomillon.uuidgenerator.quickfix.uuid.UUIDToggleDashesQuickFix
+import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity
@@ -14,6 +16,8 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement
 
 class UUIDDefaultAnnotator : Annotator {
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
+
+        if (!UUIDGeneratorSettings.instance.codeHighlighting) return
 
         val rawText = (element as? LeafPsiElement)
             ?.text

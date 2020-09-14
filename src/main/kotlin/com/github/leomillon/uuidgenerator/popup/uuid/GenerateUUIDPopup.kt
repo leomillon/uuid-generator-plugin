@@ -1,7 +1,6 @@
 package com.github.leomillon.uuidgenerator.popup.uuid
 
 import com.github.leomillon.uuidgenerator.popup.GeneratePopup
-import com.github.leomillon.uuidgenerator.settings.UUIDGeneratorPopupForm
 import javax.swing.JComponent
 
 class GenerateUUIDPopup : GeneratePopup() {
