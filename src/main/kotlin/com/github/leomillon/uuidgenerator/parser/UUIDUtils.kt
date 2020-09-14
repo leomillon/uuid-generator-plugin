@@ -2,6 +2,9 @@ package com.github.leomillon.uuidgenerator.parser
 
 import com.github.leomillon.uuidgenerator.InvalidFormatException
 
+const val UUID_WITH_DASHES_LENGTH = 36
+const val UUID_WITHOUT_DASH_LENGTH = 32
+
 private const val UUID_CHARS_LOWER = "0123456789abcdef"
 private const val UUID_CHARS_UPPER = "0123456789ABCDEF"
 
@@ -27,7 +30,7 @@ class UUIDParser(
         }
 
         val length = source.length
-        if (length != 32 && length != 36) {
+        if (length != UUID_WITHOUT_DASH_LENGTH && length != UUID_WITH_DASHES_LENGTH) {
             return false
         }
 

@@ -1,8 +1,8 @@
 package com.github.leomillon.uuidgenerator.annotator.uuid
 
+import com.github.leomillon.uuidgenerator.parser.UUID_WITH_DASHES_LENGTH
 import com.github.leomillon.uuidgenerator.parser.findUUIDs
 import com.github.leomillon.uuidgenerator.parser.textRange
-import com.github.leomillon.uuidgenerator.popup.uuid.UUIDGeneratorPopupSettings
 import com.github.leomillon.uuidgenerator.quickfix.uuid.UUIDRandomQuickFix
 import com.github.leomillon.uuidgenerator.quickfix.uuid.UUIDReformatQuickFix
 import com.github.leomillon.uuidgenerator.quickfix.uuid.UUIDToggleDashesQuickFix
@@ -20,6 +20,7 @@ class UUIDDefaultAnnotator : Annotator {
         if (!UUIDGeneratorSettings.instance.codeHighlighting) return
 
         val rawText = (element as? LeafPsiElement)
+            ?.takeIf { it.textLength >= UUID_WITH_DASHES_LENGTH }
             ?.text
             ?.takeIf { it.isNotBlank() }
             ?: return

@@ -1,6 +1,7 @@
 package com.github.leomillon.uuidgenerator.annotator.ulid
 
 import com.github.leomillon.uuidgenerator.parser.ULIDParser
+import com.github.leomillon.uuidgenerator.parser.ULID_LENGTH
 import com.github.leomillon.uuidgenerator.parser.findULIDs
 import com.github.leomillon.uuidgenerator.parser.textRange
 import com.github.leomillon.uuidgenerator.quickfix.ulid.ULIDRandomQuickFix
@@ -19,6 +20,7 @@ class ULIDDefaultAnnotator : Annotator {
         if (!ULIDGeneratorSettings.instance.codeHighlighting) return
 
         val rawText = (element as? LeafPsiElement)
+            ?.takeIf { it.textLength >= ULID_LENGTH }
             ?.text
             ?.takeIf { it.isNotBlank() }
             ?: return

@@ -5,6 +5,8 @@ import com.github.f4b6a3.ulid.util.UlidValidator
 import com.github.leomillon.uuidgenerator.InvalidFormatException
 import java.time.Instant
 
+const val ULID_LENGTH = 26
+
 const val CROCKFORD_BASE32_CHARS_UPPER = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 const val CROCKFORD_BASE32_CHARS_LOWER = "0123456789abcdefghjkmnpqrstvwxyz"
 
