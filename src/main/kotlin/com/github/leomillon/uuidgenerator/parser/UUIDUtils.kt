@@ -11,7 +11,7 @@ private val UUID_LONG_UPPER_REGEX =
     """([${UUID_CHARS_UPPER}]{8})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{12})""".toRegex()
 
 private val FIND_UUID_LONG_REGEX =
-    """(?<![0-9a-zA-Z])(([${UUID_CHARS_LOWER}]{8})-?([${UUID_CHARS_LOWER}]{4})-?([${UUID_CHARS_LOWER}]{4})-?([${UUID_CHARS_LOWER}]{4})-?([${UUID_CHARS_LOWER}]{12})|([${UUID_CHARS_UPPER}]{8})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{4})-?([${UUID_CHARS_UPPER}]{12}))(?!([0-9a-zA-Z]|\())""".toRegex()
+    """(?<![0-9a-zA-Z])(([${UUID_CHARS_LOWER}]{8})-([${UUID_CHARS_LOWER}]{4})-([${UUID_CHARS_LOWER}]{4})-([${UUID_CHARS_LOWER}]{4})-([${UUID_CHARS_LOWER}]{12})|([${UUID_CHARS_UPPER}]{8})-([${UUID_CHARS_UPPER}]{4})-([${UUID_CHARS_UPPER}]{4})-([${UUID_CHARS_UPPER}]{4})-([${UUID_CHARS_UPPER}]{12}))(?!([0-9a-zA-Z]|\())""".toRegex()
 
 private val UUID_SHORT_REGEX =
     "([0-9a-zA-Z]{8})".toRegex()

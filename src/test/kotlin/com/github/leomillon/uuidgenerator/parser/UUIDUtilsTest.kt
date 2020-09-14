@@ -55,7 +55,7 @@ class UUIDUtilsTest {
         // uuid without dashes
         Arguments.of(
             "52915d977db847b3802710837a10ba61",
-            listOf("52915d977db847b3802710837a10ba61" to 0..31)
+            emptyList<Pair<String, IntRange>>()
         ),
         // uuid without dashes with only 1 number
         Arguments.of(
@@ -65,7 +65,7 @@ class UUIDUtilsTest {
         // uuid without dashes with 2 numbers
         Arguments.of(
             "aaaaaaaaaaa2aaaaaaaaaaaaaaaaaaa1",
-            listOf("aaaaaaaaaaa2aaaaaaaaaaaaaaaaaaa1" to 0..31)
+            emptyList<Pair<String, IntRange>>()
         ),
         // 32 chars texts
         Arguments.of(
@@ -85,7 +85,7 @@ class UUIDUtilsTest {
         // 32 lower chars class name with 2 numbers
         Arguments.of(
             "class aaaaaaaaaaaaaaaaaaa1bbbbbbbbbbb2",
-            listOf("aaaaaaaaaaaaaaaaaaa1bbbbbbbbbbb2" to 6..37)
+            emptyList<Pair<String, IntRange>>()
         ),
         // 32 UPPER chars class name with 1 number
         Arguments.of(
@@ -95,7 +95,7 @@ class UUIDUtilsTest {
         // 32 UPPER chars class name with 2 numbers
         Arguments.of(
             "class AAAAAAAAAAAAAAAAAAA1BBBBBBBBBBB2",
-            listOf("AAAAAAAAAAAAAAAAAAA1BBBBBBBBBBB2" to 6..37)
+            emptyList<Pair<String, IntRange>>()
         ),
         // 32 lower chars method name with 1 number
         Arguments.of(
