@@ -31,7 +31,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
     testImplementation("junit:junit:4.13")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.2")
-    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.22")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.23")
 }
 
 tasks {
