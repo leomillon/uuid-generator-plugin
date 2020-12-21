@@ -2,7 +2,6 @@ package com.github.leomillon.uuidgenerator.annotator
 
 import assertk.assertThat
 import assertk.assertions.containsOnly
-import assertk.assertions.hasSize
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotEmpty
 import assertk.assertions.isNotNull
@@ -148,11 +147,11 @@ class IDAnnotatorTest : BasePlatformTestCase() {
     }
 
     private fun assertUUIDCount(highlightingResult: List<HighlightInfo>, count: Int) {
-        assertThat(highlightingResult.filter { it.description == "UUID" }).hasSize(count)
+        assertThat(highlightingResult.filter { it.description == "UUID" }.size).isEqualTo(count)
     }
 
     private fun assertULIDCount(highlightingResult: List<HighlightInfo>, count: Int) {
-        assertThat(highlightingResult.filter { it.description?.startsWith("ULID") ?: false }).hasSize(count)
+        assertThat(highlightingResult.filter { it.description?.startsWith("ULID") ?: false }.size).isEqualTo(count)
     }
 
     private fun assertUUIDHighlight(highlightingResult: List<HighlightInfo>, rangeStart: Int, rangeEnd: Int) {
