@@ -78,6 +78,13 @@
                                second-keystroke="shift meta alt R"/>
         </action>
 
+        <action id="uuidgenerator.replace.selection"
+                class="com.github.leomillon.uuidgenerator.action.uuid.ReplaceUUIDsInSelectionAction"
+                text="Replace Distinct UUIDs in Selection"
+                description="Find and replace existing distinct UUIDs in selection">
+            <add-to-group group-id="EditorActions"/>
+        </action>
+
 
         <!-- ULID actions -->
         <action id="ulidgenerator.random"
