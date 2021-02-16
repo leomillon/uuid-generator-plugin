@@ -1,6 +1,8 @@
 package com.github.leomillon.uuidgenerator
 
 import com.github.leomillon.uuidgenerator.parser.UUIDParser
+import com.github.leomillon.uuidgenerator.settings.cuid.CUIDFormatSettings
+import com.github.leomillon.uuidgenerator.settings.cuid.CUIDGeneratorSettings
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDFormatSettings
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
 import com.intellij.openapi.editor.Caret
@@ -57,6 +59,16 @@ object EditorDocumentUtils {
         }
 
         return formattedId
+    }
+
+    fun reformatCUID(text: String): String = reformatCUID(text, CUIDGeneratorSettings.instance)
+
+    private fun reformatCUID(id: String, generatorSettings: CUIDFormatSettings): String {
+        return if (generatorSettings.isLowerCased()) {
+            id.toLowerCase()
+        } else {
+            id.toUpperCase()
+        }
     }
 
     fun toggleUUIDDashes(text: String): String {

@@ -27,6 +27,7 @@ repositories {
 
 dependencies {
     implementation("com.github.f4b6a3:ulid-creator:2.0.2")
+    implementation("cool.graph:cuid-java:0.1.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
     testImplementation("junit:junit:4.13.2")
