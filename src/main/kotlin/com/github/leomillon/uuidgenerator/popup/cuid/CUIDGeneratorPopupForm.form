@@ -179,9 +179,5 @@
       <member id="d68d4"/>
       <member id="59ab7"/>
     </group>
-    <group name="sizeRadioButton">
-      <member id="a6e7d"/>
-      <member id="e8667"/>
-    </group>
   </buttonGroups>
 </form>

@@ -219,7 +219,7 @@ class IDAnnotatorTest : BasePlatformTestCase() {
             assertThat(quickFixActionRanges.map { it.first.action.text }.toList())
                 .containsOnly(
                     "Replace with new random CUID",
-                    "Reformat with your UUID settings"
+                    "Reformat with your CUID settings"
                 )
         }
     }

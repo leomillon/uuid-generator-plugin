@@ -8,9 +8,7 @@ class CUIDParser(
     private val source: String
 ) {
 
-    fun isValid(): Boolean = source.length == CUID_LENGTH && (source[0] == 'c' || source[0] == 'C') && source.all {
-        it in '0'..'9' || it in 'A'..'Z' || it in 'a'..'z'
-    }
+    fun isValid(): Boolean = source.length == CUID_LENGTH && FIND_CUID_REGEX.matchEntire(source) != null
 }
 
 fun CharSequence.findCUIDs() = FIND_CUID_REGEX.findAll(this)

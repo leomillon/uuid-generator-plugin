@@ -33,7 +33,7 @@ class CUIDUtilsTest {
             )
         ),
         Arguments.of(
-            "FoooooooooooooBaaaaaaaaaaa fooooooooooooobaaaaaaaaaaa FOOOOOOOOOOOOOBAAAAAAAAAAA",
+            "FooooooooooooBaaaaaaaaaaa foooooooooooobaaaaaaaaaaa FOOOOOOOOOOOOBAAAAAAAAAAA",
             emptyList<Pair<String, IntRange>>()
         )
     )

@@ -127,7 +127,7 @@
         <action id="cuidgenerator.random"
                 class="com.github.leomillon.uuidgenerator.action.cuid.GenerateCUIDRandomAction"
                 text="Random CUID"
-                description="Generate CUID">
+                description="Generate a Collision Resistant Unique Identifier (CUID)">
             <add-to-group group-id="GenerateGroup" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt O"
                                second-keystroke="shift meta alt U"/>
