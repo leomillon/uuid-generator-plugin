@@ -4,7 +4,7 @@
     </a>
 </div>
 <h1 align="center">Intellij UUID Generator</h1>
-<p align="center"><a href="https://tools.ietf.org/html/rfc4122">UUID</a> and <a href="https://github.com/ulid/spec">ULID</a> generator plugin for IntelliJ based IDEs.</p>
+<p align="center"><a href="https://tools.ietf.org/html/rfc4122">UUID</a>, <a href="https://github.com/ulid/spec">ULID</a> and <a href="https://github.com/ericelliott/cuid">CUID</a> generator plugin for IntelliJ based IDEs.</p>
 
 <p align="center">
     <a href="https://github.com/leomillon/uuid-generator-plugin/actions?query=workflow%3A%22Build+branch%22+branch%3Amaster"><img src="https://github.com/leomillon/uuid-generator-plugin/workflows/Build%20branch/badge.svg?branch=master"></a>
@@ -21,11 +21,11 @@ Link to the official plugin page : [UUID Generator](https://plugins.jetbrains.co
 
 ## Screenshots
 
-* UUID / ULID highlight
+* UUID / ULID / CUID highlight
 
 ![](./screenshots/ulid_highlight_with_timestamp.png)
 
-* UUID / ULID quick fixes
+* UUID / ULID / CUID quick fixes
 
 ![](./screenshots/uuid_quick_fixes.png)
 
