@@ -5,7 +5,7 @@ import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 plugins {
     idea
     kotlin("jvm") version "1.3.72"
-    id("org.jetbrains.intellij") version "0.6.5"
+    id("org.jetbrains.intellij") version "0.7.0"
     id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.65"
 }
 
