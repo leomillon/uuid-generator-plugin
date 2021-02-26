@@ -14,4 +14,5 @@ class CUIDParser(
 
 fun CharSequence.findCUIDs() = FIND_CUID_REGEX.findAll(this)
     .filter { CUIDParser(it.value).isValid() }
+    .filter { it.value.containsAtLeast2Numbers() }
     .map { it.value to it.range }
