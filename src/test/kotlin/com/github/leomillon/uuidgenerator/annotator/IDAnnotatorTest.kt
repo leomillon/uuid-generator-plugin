@@ -58,6 +58,13 @@ class IDAnnotatorTest : BasePlatformTestCase() {
                 public void someLongMethodNameeeeeeeeeeeeeee() {}
                 public void someotherlongmethodnameeeeeeeeee() {}
             }
+            
+            /**
+             * False positive highlight of CUID #40
+             * https://github.com/leomillon/uuid-generator-plugin/issues/40
+             */
+            public static class TicketTriggerHiredFlowAtCalculator {
+            }
         }
         """.trimIndent()
         myFixture.configureByText(JavaFileType.INSTANCE, code)
