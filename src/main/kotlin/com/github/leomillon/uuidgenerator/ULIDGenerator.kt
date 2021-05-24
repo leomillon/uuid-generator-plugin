@@ -8,13 +8,15 @@ object ULIDGenerator {
 
     fun generateULID() = generateULID(ULIDGeneratorSettings.instance)
 
-    fun generateULID(settings: ULIDFormatSettings): String =
-        if (settings.isGuidFormat()) {
-            UlidCreator.getUlid().toString()
-        } else {
-            UlidCreator.getUlidString()
+    fun generateULID(settings: ULIDFormatSettings): String = UlidCreator.getUlid()
+        .let {
+            if (settings.isGuidFormat()) {
+                it.toUuid().toString()
+            } else {
+                it.toString()
+            }
         }
-            .let { formatULID(it, settings) }
+        .let { formatULID(it, settings) }
 
     private fun formatULID(id: String, generatorSettings: ULIDFormatSettings): String =
         id.let {

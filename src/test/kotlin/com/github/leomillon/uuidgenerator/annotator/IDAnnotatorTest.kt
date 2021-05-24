@@ -5,7 +5,7 @@ import assertk.assertions.containsOnly
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotEmpty
 import assertk.assertions.isNotNull
-import com.github.f4b6a3.ulid.util.UlidUtil
+import com.github.f4b6a3.ulid.Ulid
 import com.github.leomillon.uuidgenerator.settings.cuid.CUIDGeneratorSettings
 import com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorSettings
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
@@ -23,7 +23,7 @@ import java.time.ZoneId
 private const val targetUUID = "037d596f-0740-48d5-a5ec-8b4948f9e561"
 private const val targetULID = "01EGNR5DS9WY7VG9YPT0TXDCA5"
 private const val targetCUID = "ckl87igpp000701jp3u7c04r7"
-private val ulidDateTime = UlidUtil.extractInstant(targetULID).atZone(ZoneId.systemDefault())
+private val ulidDateTime = Ulid.getInstant(targetULID).atZone(ZoneId.systemDefault())
 
 class IDAnnotatorTest : BasePlatformTestCase() {
 
