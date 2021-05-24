@@ -4,7 +4,7 @@ import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 
 plugins {
     idea
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.5.10"
     id("org.jetbrains.intellij") version "0.7.3"
     id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.66"
 }
@@ -38,7 +38,16 @@ dependencies {
 tasks {
 
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_1_8.toString()
+            freeCompilerArgs = listOf(
+                /**
+                 * Bug with Kotlin 1.5.10 -> cannot use the method reference syntax:
+                 * `com.github.leomillon.uuidgenerator.parser.IdType.UUID(UUIDGenerator::generateUUID)`
+                 */
+                "-Xno-optimized-callable-references"
+            )
+        }
     }
 
     withType<Test> {
