@@ -52,3 +52,11 @@ Link to the official plugin page : [UUID Generator](https://plugins.jetbrains.co
 * UUID format settings dialogue
 
 ![](./screenshots/uuid_settings_dialogue.png)
+
+* ID placeholders highlight
+
+![](./screenshots/id_placeholders_highlight.png)
+
+* ID placeholders replacement action
+
+![](./screenshots/id_placeholders_replacement.gif)

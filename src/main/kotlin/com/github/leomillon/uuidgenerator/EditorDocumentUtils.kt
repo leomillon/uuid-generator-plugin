@@ -7,6 +7,7 @@ import com.github.leomillon.uuidgenerator.settings.uuid.UUIDFormatSettings
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
 import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.editor.RangeMarker
 import com.intellij.openapi.util.TextRange
 
 val UUID_LONG_REGEX =
@@ -34,6 +35,10 @@ object EditorDocumentUtils {
 
     fun replaceTextAtRange(editor: Editor, range: TextRange, text: CharSequence) {
         editor.document.replaceString(range.startOffset, range.endOffset, text)
+    }
+
+    fun replaceTextAtRange(editor: Editor, rangeMarker: RangeMarker, text: CharSequence) {
+        editor.document.replaceString(rangeMarker.startOffset, rangeMarker.endOffset, text)
     }
 
     fun reformatUUID(text: String): String = reformatUUID(text, UUIDGeneratorSettings.instance)
