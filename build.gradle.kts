@@ -5,7 +5,7 @@ import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 plugins {
     idea
     kotlin("jvm") version "1.3.72"
-    id("org.jetbrains.intellij") version "0.7.2"
+    id("org.jetbrains.intellij") version "0.7.3"
     id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.66"
 }
 
@@ -29,7 +29,7 @@ dependencies {
     implementation("com.github.f4b6a3:ulid-creator:2.0.2")
     implementation("cool.graph:cuid-java:0.1.1")
 
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
     testImplementation("junit:junit:4.13.2")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.2")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.23.1")
