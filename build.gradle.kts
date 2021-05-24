@@ -38,7 +38,16 @@ dependencies {
 tasks {
 
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_1_8.toString()
+            freeCompilerArgs = listOf(
+                /**
+                 * Bug with Kotlin 1.5.10 -> cannot use the method reference syntax:
+                 * `com.github.leomillon.uuidgenerator.parser.IdType.UUID(UUIDGenerator::generateUUID)`
+                 */
+                "-Xno-optimized-callable-references"
+            )
+        }
     }
 
     withType<Test> {
