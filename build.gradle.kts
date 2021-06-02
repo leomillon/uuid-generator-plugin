@@ -6,7 +6,7 @@ plugins {
     idea
     kotlin("jvm") version "1.5.10"
     id("org.jetbrains.intellij") version "0.7.3"
-    id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.68.4"
+    id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.68.6"
 }
 
 intellij {
