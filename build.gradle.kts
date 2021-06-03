@@ -1,12 +1,10 @@
 import org.jetbrains.intellij.tasks.PublishTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 
 plugins {
     idea
     kotlin("jvm") version "1.5.10"
     id("org.jetbrains.intellij") version "0.7.3"
-    id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.68.6"
 }
 
 intellij {
@@ -93,11 +91,6 @@ tasks {
             val version: String by project
             println(version)
         }
-    }
-
-    create<GitChangelogTask>("gitChangelogTask") {
-        file = File("CHANGELOG.md")
-        templateContent = file("template_changelog.mustache").readText()
     }
 }
 
