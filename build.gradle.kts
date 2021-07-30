@@ -1,21 +1,26 @@
-import org.jetbrains.intellij.tasks.PublishTask
+import org.jetbrains.intellij.tasks.PublishPluginTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     idea
+    // Kotlin support
     kotlin("jvm") version "1.5.21"
-    id("org.jetbrains.intellij") version "0.7.3"
+    // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
+    id("org.jetbrains.intellij") version "1.1.2"
+    // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
+    id("org.jetbrains.changelog") version "1.1.2"
 }
 
 intellij {
-    version =
-        "IC-2020.1" //IntelliJ IDEA 2020.1 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
-    pluginName = "UUID Generator"
-    updateSinceUntilBuild = false //Disables updating since-build attribute in plugin.xml
+    pluginName.set("UUID Generator")
+    version.set("IC-2020.1") //IntelliJ IDEA 2020.1 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
+    updateSinceUntilBuild.set(false)
 
-    setPlugins(
-        "java",
-        "org.jetbrains.kotlin"
+    plugins.set(
+        listOf(
+            "java",
+            "org.jetbrains.kotlin"
+        )
     )
 }
 
@@ -62,9 +67,9 @@ tasks {
         }
     }
 
-    withType<PublishTask> {
-        token(prop("intellijPublishToken") ?: "unknown")
-        channels(prop("intellijPublishChannels") ?: "")
+    withType<PublishPluginTask> {
+        token.set(provider { prop("intellijPublishToken") ?: "unknown" })
+        channels.set(provider { listOf(prop("intellijPublishChannels") ?: "") })
     }
 
     patchPluginXml {
@@ -82,8 +87,10 @@ tasks {
             }
 
         val version: String by project
-        pluginDescription(fileInMetaInf("description.html").readText().replaceGitHubContentUrl(version))
-        changeNotes(fileInMetaInf("change-notes.html").readText())
+        pluginDescription.set(provider {
+            fileInMetaInf("description.html").readText().replaceGitHubContentUrl(version)
+        })
+        changeNotes.set(provider { fileInMetaInf("change-notes.html").readText() })
     }
 
     create("printVersion") {
