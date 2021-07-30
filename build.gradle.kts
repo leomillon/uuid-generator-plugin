@@ -37,7 +37,7 @@ tasks {
 
     withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_1_8.toString()
+            jvmTarget = JavaVersion.VERSION_11.toString()
             freeCompilerArgs = listOf(
                 /**
                  * Bug with Kotlin 1.5.10 -> cannot use the method reference syntax:

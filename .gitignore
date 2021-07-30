@@ -131,3 +131,6 @@ gradle-app.setting
 
 # Git changelog plugin task cache
 .okhttpcache/
+
+# jENV
+.java-version
