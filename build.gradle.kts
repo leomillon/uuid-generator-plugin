@@ -26,13 +26,15 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.f4b6a3:ulid-creator:3.2.0")
+    implementation("com.github.f4b6a3:ulid-creator:4.1.1")
     implementation("cool.graph:cuid-java:0.1.1")
 
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
+    testImplementation(platform("org.junit:junit-bom:5.7.2"))
     testImplementation("junit:junit:4.13.2")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.2")
-    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
+
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
