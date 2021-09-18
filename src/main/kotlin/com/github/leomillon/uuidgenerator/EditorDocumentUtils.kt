@@ -9,6 +9,7 @@ import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.RangeMarker
 import com.intellij.openapi.util.TextRange
+import java.util.*
 
 val UUID_LONG_REGEX =
     """([0-9a-zA-Z]{8})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{4})-?([0-9a-zA-Z]{12})""".toRegex()
@@ -52,9 +53,9 @@ object EditorDocumentUtils {
         }
 
         formattedId = if (generatorSettings.isLowerCased()) {
-            formattedId.toLowerCase()
+            formattedId.lowercase(Locale.getDefault())
         } else {
-            formattedId.toUpperCase()
+            formattedId.uppercase(Locale.getDefault())
         }
 
         formattedId = when {
@@ -70,9 +71,9 @@ object EditorDocumentUtils {
 
     private fun reformatCUID(id: String, generatorSettings: CUIDFormatSettings): String {
         return if (generatorSettings.isLowerCased()) {
-            id.toLowerCase()
+            id.lowercase(Locale.getDefault())
         } else {
-            id.toUpperCase()
+            id.uppercase(Locale.getDefault())
         }
     }
 
