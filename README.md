@@ -19,44 +19,72 @@
 
 Link to the official plugin page : [UUID Generator](https://plugins.jetbrains.com/plugin/8320-uuid-generator)
 
-## Screenshots
+## Description
 
-* UUID / ULID / CUID highlight
+<!-- Plugin description -->
+[UUID](https://tools.ietf.org/html/rfc4122), [ULID](https://github.com/ulid/spec) and [CUID](https://github.com/ericelliott/cuid) generator plugin for IntelliJ based IDEs..
 
-![](./screenshots/ulid_highlight_with_timestamp.png)
+For example : `123e4567-e89b-12d3-a456-426655440000`.
 
-* UUID / ULID / CUID quick fixes
+You will find it in the **Generate popup** -> **Random UUID**.
 
-![](./screenshots/uuid_quick_fixes.png)
+## Available actions
 
-* Random UUID
+- Random `UUID` / `ULID` / `CUID` (also as quick fix)
+- Generate `UUID` / `ULID` / `CUID` to clipboard
+- Generate `UUID` / `ULID` / `CUID` Popup
+- Toggle `UUID` dashes (also as quick fix)
+- Reformat `UUID` / `CUID` with settings (also as quick fix)
+- Replace Distinct `UUID`s in Selection
+- Replace Random `UUID` / `ULID` / `CUID` Placeholders in Selection
 
-![](./screenshots/generate_random_uuid.png)
+`UUID`/`ULID`/`CUID` highlight in any language with context info (Timestamp extraction for `ULID`) and quick fix suggestions
 
-* UUID Generate Popup
+## Demo
 
-![](./screenshots/generate_popup.png)
+- `UUID` / `ULID` / `CUID` highlight
 
-* Multi-caret support
+![UUID / ULID / CUID highlight](./screenshots/ulid_highlight_with_timestamp.png)
 
-![](./screenshots/multi_caret_support.png)
+- `UUID` / `ULID` / `CUID` quick fixes
 
-* Toggle dashes
+![UUID / ULID / CUID quick fixes](./screenshots/uuid_quick_fixes.png)
 
-![](./screenshots/toggle_dashes.png)
+- Random `UUID`
 
-* UUID to clipboard
+![Random UUID](./screenshots/generate_random_uuid.png)
 
-![](./screenshots/uuid_to_clipboard.jpg)
+- `UUID` Generate Popup
 
-* UUID format settings dialogue
+![UUID Generate Popup](./screenshots/generate_popup.png)
 
-![](./screenshots/uuid_settings_dialogue.png)
+- Multi-caret support
 
-* ID placeholders highlight
+![Multi-caret support](./screenshots/multi_caret_support.png)
 
-![](./screenshots/id_placeholders_highlight.png)
+- Toggle dashes
 
-* ID placeholders replacement action
+![Toggle dashes](./screenshots/toggle_dashes.png)
 
-![](./screenshots/id_placeholders_replacement.gif)
+- `UUID` to clipboard
+
+![UUID to clipboard](./screenshots/uuid_to_clipboard.jpg)
+
+- `UUID` format settings dialogue
+
+![UUID format settings dialogue](./screenshots/uuid_settings_dialogue.png)
+
+- ID placeholders highlight
+
+![ID placeholders highlight](./screenshots/id_placeholders_highlight.png)
+
+- ID placeholders replacement action
+
+![ID placeholders replacement action](./screenshots/id_placeholders_replacement.gif)
+
+## Contributors
+
+Special thanks to:
+
+- [Davide Maggio (DVDAndroid)](https://plugins.jetbrains.com/author/683c57fa-d7ec-4d24-ae4d-82442d3aa75a)
+<!-- Plugin description end -->

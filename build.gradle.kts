@@ -1,31 +1,28 @@
-import org.jetbrains.intellij.tasks.PublishPluginTask
+import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+fun properties(key: String) = project.findProperty(key).toString()
+
 plugins {
-    idea
+    // Java support
+    id("java")
     // Kotlin support
-    kotlin("jvm") version "1.5.21"
-    // gradle-intellij-plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-    id("org.jetbrains.intellij") version "1.1.2"
-    // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
-    id("org.jetbrains.changelog") version "1.1.2"
+    id("org.jetbrains.kotlin.jvm") version "1.5.30"
+    // Gradle IntelliJ Plugin
+    id("org.jetbrains.intellij") version "1.1.6"
+    // Gradle Changelog Plugin
+    id("org.jetbrains.changelog") version "1.3.0"
+    // Gradle Qodana Plugin
+    id("org.jetbrains.qodana") version "0.1.12"
 }
 
-intellij {
-    pluginName.set("UUID Generator")
-    version.set("IC-2020.1") //IntelliJ IDEA 2020.1 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
-    updateSinceUntilBuild.set(false)
+group = properties("pluginGroup")
+version = properties("pluginVersion")
 
-    plugins.set(
-        listOf(
-            "java",
-            "org.jetbrains.kotlin"
-        )
-    )
-}
-
+// Configure project's dependencies
 repositories {
     mavenCentral()
+    maven("https://repo1.maven.org/maven2/")
 }
 
 dependencies {
@@ -38,68 +35,112 @@ dependencies {
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
 }
 
+// Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
+intellij {
+    pluginName.set(properties("pluginName"))
+    version.set(properties("platformVersion"))
+    type.set(properties("platformType"))
+    downloadSources.set(properties("platformDownloadSources").toBoolean())
+    updateSinceUntilBuild.set(true)
+
+    // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
+    plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
+}
+
+// Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
+changelog {
+    version.set(properties("pluginVersion"))
+    groups.set(emptyList())
+}
+
+// Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
+qodana {
+    cachePath.set(projectDir.resolve(".qodana").canonicalPath)
+    reportPath.set(projectDir.resolve("build/reports/inspections").canonicalPath)
+    saveReport.set(true)
+    showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
+}
+
 tasks {
-
-    withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_11.toString()
-            freeCompilerArgs = listOf(
-                /**
-                 * Bug with Kotlin 1.5.10 -> cannot use the method reference syntax:
-                 * `com.github.leomillon.uuidgenerator.parser.IdType.UUID(UUIDGenerator::generateUUID)`
-                 */
-                "-Xno-optimized-callable-references"
-            )
+    // Set the JVM compatibility versions
+    properties("javaVersion").let {
+        withType<JavaCompile> {
+            sourceCompatibility = it
+            targetCompatibility = it
+        }
+        withType<KotlinCompile> {
+            kotlinOptions.jvmTarget = it
         }
     }
 
-    withType<Test> {
-        useJUnitPlatform {
-            includeEngines = setOf("junit-jupiter", "junit-vintage")
-        }
-        jvmArgs(
-            "-Dspring.test.constructor.autowire.mode=ALL",
-            "-Djunit.jupiter.testinstance.lifecycle.default=per_class",
-            "-Duser.language=en"
-        )
-        testLogging {
-            events("passed", "skipped", "failed")
-        }
-    }
-
-    withType<PublishPluginTask> {
-        token.set(provider { prop("intellijPublishToken") ?: "unknown" })
-        channels.set(provider { listOf(prop("intellijPublishChannels") ?: "") })
+    wrapper {
+        gradleVersion = properties("gradleVersion")
     }
 
     patchPluginXml {
-        fun fileInMetaInf(fileName: String) = file("src/main/resources/META-INF").resolve(fileName)
+        version.set(properties("pluginVersion"))
+        sinceBuild.set(properties("pluginSinceBuild"))
+        untilBuild.set(properties("pluginUntilBuild"))
 
-        fun String.replaceGitHubContentUrl(projectVersion: String): String = when {
-            projectVersion.endsWith("-SNAPSHOT") -> "master"
-            else -> projectVersion
-        }
-            .let { targetGitHubBranchName ->
-                this.replace(
-                    "{{GIT_HUB_BRANCH}}",
-                    targetGitHubBranchName
-                )
-            }
+        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
+        pluginDescription.set(
+            projectDir.resolve("README.md").readText().lines().run {
+                val start = "<!-- Plugin description -->"
+                val end = "<!-- Plugin description end -->"
 
-        val version: String by project
-        pluginDescription.set(provider {
-            fileInMetaInf("description.html").readText().replaceGitHubContentUrl(version)
+                if (!containsAll(listOf(start, end))) {
+                    throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+                }
+                subList(indexOf(start) + 1, indexOf(end))
+            }.joinToString("\n").run { markdownToHTML(this) }
+                .let {
+                    val pluginVersion = properties("pluginVersion")
+                    val gitHubContentBasePath = "https://raw.githubusercontent.com/ekino/jcv-idea-plugin"
+                    val gitHubRef = when {
+                        pluginVersion.endsWith("-SNAPSHOT") -> "master"
+                        else -> "v$pluginVersion"
+                    }
+                    // Replace local url with GitHub base url and set width to 500px
+                    it.replace(
+                        """src="./""",
+                        """width="500" src="$gitHubContentBasePath/$gitHubRef/"""
+                    )
+                }
+        )
+
+        // Get the latest available change notes from the changelog file
+        changeNotes.set(provider {
+            changelog.run {
+                getOrNull(properties("pluginVersion")) ?: getLatest()
+            }.toHTML()
         })
-        changeNotes.set(provider { fileInMetaInf("change-notes.html").readText() })
     }
 
-    create("printVersion") {
-        doLast {
-            val version: String by project
-            println(version)
-        }
+    runPluginVerifier {
+        ideVersions.set(properties("pluginVerifierIdeVersions").split(',').map(String::trim).filter(String::isNotEmpty))
+    }
+
+    // Configure UI tests plugin
+    // Read more: https://github.com/JetBrains/intellij-ui-test-robot
+    runIdeForUiTests {
+        systemProperty("robot-server.port", "8082")
+        systemProperty("ide.mac.message.dialogs.as.sheets", "false")
+        systemProperty("jb.privacy.policy.text", "<!--999.999-->")
+        systemProperty("jb.consents.confirmation.enabled", "false")
+    }
+
+    signPlugin {
+        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
+        privateKey.set(System.getenv("PRIVATE_KEY"))
+        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+    }
+
+    publishPlugin {
+        dependsOn("patchChangelog")
+        token.set(System.getenv("PUBLISH_TOKEN"))
+        // pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
+        // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
+        // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
+        channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
     }
 }
-
-fun prop(name: String): String? =
-    extra.properties[name] as? String
