@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.f4b6a3:ulid-creator:3.2.0")
+    implementation("com.github.f4b6a3:ulid-creator:4.1.1")
     implementation("cool.graph:cuid-java:0.1.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
