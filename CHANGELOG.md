@@ -3,6 +3,10 @@
 ## [Unreleased]
 ### Changed
 - Upgrade to latest [IntelliJ Plugin project template](https://github.com/JetBrains/intellij-platform-plugin-template)
+- IDs generate actions are no more directly available in "Generate" menu but in sub menus #86
+
+### Fixed
+- Replace deprecated service manager usage by new Kotlin methods 
 
 ## [4.4.1]
 ### Fixed
