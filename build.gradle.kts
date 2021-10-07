@@ -97,7 +97,7 @@ tasks {
             }.joinToString("\n").run { markdownToHTML(this) }
                 .let {
                     val pluginVersion = properties("pluginVersion")
-                    val gitHubContentBasePath = "https://raw.githubusercontent.com/ekino/jcv-idea-plugin"
+                    val gitHubContentBasePath = "https://raw.githubusercontent.com/leomillon/uuid-generator-plugin"
                     val gitHubRef = when {
                         pluginVersion.endsWith("-SNAPSHOT") -> "master"
                         else -> "v$pluginVersion"
