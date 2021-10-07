@@ -1,6 +1,8 @@
 # UUID Generator Changelog
 
 ## [Unreleased]
+### Fixed
+- Set proper link to screenshots in plugin description
 
 ## [4.5.0]
 ### Changed
