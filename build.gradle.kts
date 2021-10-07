@@ -29,7 +29,7 @@ dependencies {
     implementation("com.github.f4b6a3:ulid-creator:4.1.1")
     implementation("cool.graph:cuid-java:0.1.1")
 
-    testImplementation(platform("org.junit:junit-bom:5.7.2"))
+    testImplementation(platform("org.junit:junit-bom:5.8.1"))
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
@@ -97,7 +97,7 @@ tasks {
             }.joinToString("\n").run { markdownToHTML(this) }
                 .let {
                     val pluginVersion = properties("pluginVersion")
-                    val gitHubContentBasePath = "https://raw.githubusercontent.com/ekino/jcv-idea-plugin"
+                    val gitHubContentBasePath = "https://raw.githubusercontent.com/leomillon/uuid-generator-plugin"
                     val gitHubRef = when {
                         pluginVersion.endsWith("-SNAPSHOT") -> "master"
                         else -> "v$pluginVersion"
