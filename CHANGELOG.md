@@ -1,6 +1,8 @@
 # UUID Generator Changelog
 
 ## [Unreleased]
+
+## [4.5.1]
 ### Fixed
 - Set proper link to screenshots in plugin description
 - Since build is now set to 2021.1+
@@ -57,7 +59,8 @@
 - New 'Reformat UUID with settings' action and quick fix
 - IntelliJ IDEA version support since '2020.1'
 
-[Unreleased]: https://github.com/leomillon/uuid-generator-plugin/compare/4.5.0...HEAD
+[Unreleased]: https://github.com/leomillon/uuid-generator-plugin/compare/4.5.1...HEAD
+[4.5.1]: https://github.com/leomillon/uuid-generator-plugin/compare/4.5.0...4.5.1
 [4.5.0]: https://github.com/leomillon/uuid-generator-plugin/compare/4.4.1...4.5.0
 [4.4.1]: https://github.com/leomillon/uuid-generator-plugin/compare/4.4.0...4.4.1
 [4.4.0]: https://github.com/leomillon/uuid-generator-plugin/compare/4.3.2...4.4.0
