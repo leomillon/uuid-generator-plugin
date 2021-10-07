@@ -3,6 +3,7 @@ package com.github.leomillon.uuidgenerator
 import com.github.f4b6a3.ulid.UlidCreator
 import com.github.leomillon.uuidgenerator.settings.ulid.ULIDFormatSettings
 import com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorSettings
+import java.util.*
 
 object ULIDGenerator {
 
@@ -20,6 +21,6 @@ object ULIDGenerator {
 
     private fun formatULID(id: String, generatorSettings: ULIDFormatSettings): String =
         id.let {
-            if (generatorSettings.isLowerCased()) it.toLowerCase() else it.toUpperCase()
+            if (generatorSettings.isLowerCased()) it.lowercase(Locale.getDefault()) else it.uppercase(Locale.getDefault())
         }
 }

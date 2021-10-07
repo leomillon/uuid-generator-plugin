@@ -1,8 +1,6 @@
 package com.github.leomillon.uuidgenerator.settings.cuid
 
 import com.github.leomillon.uuidgenerator.settings.cuid.form.CUIDGeneratorSettingsForm
-import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer
-import com.intellij.ide.impl.ProjectUtil
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.ConfigurationException
 import org.jetbrains.annotations.Nls

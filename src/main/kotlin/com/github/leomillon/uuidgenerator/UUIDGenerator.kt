@@ -2,7 +2,7 @@ package com.github.leomillon.uuidgenerator
 
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDFormatSettings
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings
-import java.util.UUID
+import java.util.*
 
 object UUIDGenerator {
 
@@ -25,7 +25,7 @@ object UUIDGenerator {
         }
 
         if (!generatorSettings.isLowerCased()) {
-            formattedId = formattedId.toUpperCase()
+            formattedId = formattedId.uppercase(Locale.getDefault())
         }
 
         if (!generatorSettings.isWithDashes()) {

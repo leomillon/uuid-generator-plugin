@@ -2,9 +2,9 @@ package com.github.leomillon.uuidgenerator.popup.uuid
 
 import com.github.leomillon.uuidgenerator.settings.uuid.UUIDFormatSettings
 import com.intellij.openapi.components.PersistentStateComponent
-import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
+import com.intellij.openapi.components.service
 import com.intellij.util.xmlb.XmlSerializerUtil
 import org.jetbrains.annotations.Nullable
 
@@ -14,7 +14,7 @@ class UUIDGeneratorPopupSettings : PersistentStateComponent<UUIDGeneratorPopupSe
 
     companion object {
         val instance: UUIDGeneratorPopupSettings
-            get() = ServiceManager.getService(UUIDGeneratorPopupSettings::class.java)
+            get() = service()
     }
 
     /**

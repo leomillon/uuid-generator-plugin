@@ -16,29 +16,29 @@
         <!--UUID-->
         <applicationConfigurable instance="com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorConfigurable"/>
 
-        <applicationService serviceInterface="com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings"
-                            serviceImplementation="com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings"/>
+        <applicationService
+                serviceImplementation="com.github.leomillon.uuidgenerator.settings.uuid.UUIDGeneratorSettings"/>
 
-        <applicationService serviceInterface="com.github.leomillon.uuidgenerator.popup.uuid.UUIDGeneratorPopupSettings"
-                            serviceImplementation="com.github.leomillon.uuidgenerator.popup.uuid.UUIDGeneratorPopupSettings"/>
+        <applicationService
+                serviceImplementation="com.github.leomillon.uuidgenerator.popup.uuid.UUIDGeneratorPopupSettings"/>
 
         <!--ULID-->
         <applicationConfigurable instance="com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorConfigurable"/>
 
-        <applicationService serviceInterface="com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorSettings"
-                            serviceImplementation="com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorSettings"/>
+        <applicationService
+                serviceImplementation="com.github.leomillon.uuidgenerator.settings.ulid.ULIDGeneratorSettings"/>
 
-        <applicationService serviceInterface="com.github.leomillon.uuidgenerator.popup.ulid.ULIDGeneratorPopupSettings"
-                            serviceImplementation="com.github.leomillon.uuidgenerator.popup.ulid.ULIDGeneratorPopupSettings"/>
+        <applicationService
+                serviceImplementation="com.github.leomillon.uuidgenerator.popup.ulid.ULIDGeneratorPopupSettings"/>
 
         <!--CUID-->
         <applicationConfigurable instance="com.github.leomillon.uuidgenerator.settings.cuid.CUIDGeneratorConfigurable"/>
 
-        <applicationService serviceInterface="com.github.leomillon.uuidgenerator.settings.cuid.CUIDGeneratorSettings"
-                            serviceImplementation="com.github.leomillon.uuidgenerator.settings.cuid.CUIDGeneratorSettings"/>
+        <applicationService
+                serviceImplementation="com.github.leomillon.uuidgenerator.settings.cuid.CUIDGeneratorSettings"/>
 
-        <applicationService serviceInterface="com.github.leomillon.uuidgenerator.popup.cuid.CUIDGeneratorPopupSettings"
-                            serviceImplementation="com.github.leomillon.uuidgenerator.popup.cuid.CUIDGeneratorPopupSettings"/>
+        <applicationService
+                serviceImplementation="com.github.leomillon.uuidgenerator.popup.cuid.CUIDGeneratorPopupSettings"/>
 
         <annotator language=""
                    implementationClass="com.github.leomillon.uuidgenerator.annotator.uuid.UUIDDefaultAnnotator"/>
@@ -60,30 +60,41 @@
         </action>
 
         <!-- UUID actions -->
-        <action id="uuidgenerator.random"
-                class="com.github.leomillon.uuidgenerator.action.uuid.GenerateUUIDRandomAction"
-                text="Random UUID"
-                description="Generate a Universally Unique Identifier (UUID)">
+        <action id="uuidgenerator.UUIDGeneratePopupMenuAction"
+                class="com.github.leomillon.uuidgenerator.action.uuid.UUIDGeneratePopupMenuAction"
+                text="UUID..."
+                description="Actions to generate UUIDs">
             <add-to-group group-id="GenerateGroup" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U"
-                               second-keystroke="shift meta alt U"/>
         </action>
-        <action id="uuidgenerator.to-clipboard"
-                class="com.github.leomillon.uuidgenerator.action.uuid.GenerateUUIDToClipboardAction"
-                text="Generate UUID to clipboard"
-                description="Generate a new UUID to clipboard">
-            <add-to-group group-id="GenerateGroup"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U"
-                               second-keystroke="shift meta alt C"/>
-        </action>
-        <action id="uuidgenerator.on-demand-popup"
-                class="com.github.leomillon.uuidgenerator.action.uuid.GenerateUUIDPopupAction"
-                text="Generate UUID Popup"
-                description="Show the UUID generator Popup">
-            <add-to-group group-id="GenerateGroup"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U"
-                               second-keystroke="shift meta alt P"/>
-        </action>
+        <group
+                id="uuidgenerator.GenerateActionGroup"
+                text="Generate UUID"
+                description="Actions to generate UUIDs"
+                popup="true"
+        >
+            <action id="uuidgenerator.random"
+                    class="com.github.leomillon.uuidgenerator.action.uuid.GenerateUUIDRandomAction"
+                    text="Random UUID"
+                    description="Generate a Universally Unique Identifier (UUID)">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U"
+                                   second-keystroke="shift meta alt U"/>
+            </action>
+            <action id="uuidgenerator.to-clipboard"
+                    class="com.github.leomillon.uuidgenerator.action.uuid.GenerateUUIDToClipboardAction"
+                    text="Generate UUID to clipboard"
+                    description="Generate a new UUID to clipboard">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U"
+                                   second-keystroke="shift meta alt C"/>
+            </action>
+            <action id="uuidgenerator.on-demand-popup"
+                    class="com.github.leomillon.uuidgenerator.action.uuid.GenerateUUIDPopupAction"
+                    text="Generate UUID Popup"
+                    description="Show the UUID generator Popup">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt U"
+                                   second-keystroke="shift meta alt P"/>
+            </action>
+        </group>
+
         <action id="uuidgenerator.toggle-dashes" class="com.github.leomillon.uuidgenerator.action.ToggleDashesAction"
                 text="Toggle UUID dashes"
                 description="Toggle the dashes of a valid UUID">
@@ -107,56 +118,76 @@
         </action>
 
         <!-- ULID actions -->
-        <action id="ulidgenerator.random"
-                class="com.github.leomillon.uuidgenerator.action.ulid.GenerateULIDRandomAction"
-                text="Random ULID"
-                description="Generate a Universally Unique Lexicographically Sortable Identifier (ULID)">
+        <action id="ulidgenerator.ULIDGeneratePopupMenuAction"
+                class="com.github.leomillon.uuidgenerator.action.ulid.ULIDGeneratePopupMenuAction"
+                text="ULID..."
+                description="Actions to generate ULIDs">
             <add-to-group group-id="GenerateGroup" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt L"
-                               second-keystroke="shift meta alt U"/>
         </action>
-        <action id="ulidgenerator.to-clipboard"
-                class="com.github.leomillon.uuidgenerator.action.ulid.GenerateULIDToClipboardAction"
-                text="Generate ULID to clipboard"
-                description="Generate a new ULID to clipboard">
-            <add-to-group group-id="GenerateGroup"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt L"
-                               second-keystroke="shift meta alt C"/>
-        </action>
-        <action id="ulidgenerator.on-demand-popup"
-                class="com.github.leomillon.uuidgenerator.action.ulid.GenerateULIDPopupAction"
-                text="Generate ULID Popup"
-                description="Show the ULID generator Popup">
-            <add-to-group group-id="GenerateGroup"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt L"
-                               second-keystroke="shift meta alt P"/>
-        </action>
+        <group
+                id="ulidgenerator.GenerateActionGroup"
+                text="Generate ULID"
+                description="Actions to generate ULIDs"
+                popup="true"
+        >
+            <action id="ulidgenerator.random"
+                    class="com.github.leomillon.uuidgenerator.action.ulid.GenerateULIDRandomAction"
+                    text="Random ULID"
+                    description="Generate a Universally Unique Lexicographically Sortable Identifier (ULID)">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt L"
+                                   second-keystroke="shift meta alt U"/>
+            </action>
+            <action id="ulidgenerator.to-clipboard"
+                    class="com.github.leomillon.uuidgenerator.action.ulid.GenerateULIDToClipboardAction"
+                    text="Generate ULID to clipboard"
+                    description="Generate a new ULID to clipboard">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt L"
+                                   second-keystroke="shift meta alt C"/>
+            </action>
+            <action id="ulidgenerator.on-demand-popup"
+                    class="com.github.leomillon.uuidgenerator.action.ulid.GenerateULIDPopupAction"
+                    text="Generate ULID Popup"
+                    description="Show the ULID generator Popup">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt L"
+                                   second-keystroke="shift meta alt P"/>
+            </action>
+        </group>
 
         <!-- CUID actions -->
-        <action id="cuidgenerator.random"
-                class="com.github.leomillon.uuidgenerator.action.cuid.GenerateCUIDRandomAction"
-                text="Random CUID"
-                description="Generate a Collision Resistant Unique Identifier (CUID)">
+        <action id="cuidgenerator.CUIDGeneratePopupMenuAction"
+                class="com.github.leomillon.uuidgenerator.action.cuid.CUIDGeneratePopupMenuAction"
+                text="CUID..."
+                description="Actions to generate CUIDs">
             <add-to-group group-id="GenerateGroup" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt O"
-                               second-keystroke="shift meta alt U"/>
         </action>
-        <action id="cuidgenerator.to-clipboard"
-                class="com.github.leomillon.uuidgenerator.action.cuid.GenerateCUIDToClipboardAction"
-                text="Generate CUID to clipboard"
-                description="Generate a new CUID to clipboard">
-            <add-to-group group-id="GenerateGroup"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt O"
-                               second-keystroke="shift meta alt C"/>
-        </action>
-        <action id="cuidgenerator.on-demand-popup"
-                class="com.github.leomillon.uuidgenerator.action.cuid.GenerateCUIDPopupAction"
-                text="Generate CUID Popup"
-                description="Show the CUID generator Popup">
-            <add-to-group group-id="GenerateGroup"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt O"
-                               second-keystroke="shift meta alt P"/>
-        </action>
+        <group
+                id="cuidgenerator.GenerateActionGroup"
+                text="Generate CUID"
+                description="Actions to generate CUIDs"
+                popup="true"
+        >
+            <action id="cuidgenerator.random"
+                    class="com.github.leomillon.uuidgenerator.action.cuid.GenerateCUIDRandomAction"
+                    text="Random CUID"
+                    description="Generate a Collision Resistant Unique Identifier (CUID)">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt O"
+                                   second-keystroke="shift meta alt U"/>
+            </action>
+            <action id="cuidgenerator.to-clipboard"
+                    class="com.github.leomillon.uuidgenerator.action.cuid.GenerateCUIDToClipboardAction"
+                    text="Generate CUID to clipboard"
+                    description="Generate a new CUID to clipboard">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt O"
+                                   second-keystroke="shift meta alt C"/>
+            </action>
+            <action id="cuidgenerator.on-demand-popup"
+                    class="com.github.leomillon.uuidgenerator.action.cuid.GenerateCUIDPopupAction"
+                    text="Generate CUID Popup"
+                    description="Show the CUID generator Popup">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta alt O"
+                                   second-keystroke="shift meta alt P"/>
+            </action>
+        </group>
     </actions>
 
 </idea-plugin>

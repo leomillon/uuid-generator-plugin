@@ -3,6 +3,7 @@ package com.github.leomillon.uuidgenerator
 import com.github.leomillon.uuidgenerator.settings.cuid.CUIDFormatSettings
 import com.github.leomillon.uuidgenerator.settings.cuid.CUIDGeneratorSettings
 import cool.graph.cuid.Cuid
+import java.util.*
 
 object CUIDGenerator {
 
@@ -13,6 +14,6 @@ object CUIDGenerator {
 
     private fun formatCUID(id: String, generatorSettings: CUIDFormatSettings): String =
         id.let {
-            if (generatorSettings.isLowerCased()) it.toLowerCase() else it.toUpperCase()
+            if (generatorSettings.isLowerCased()) it.lowercase(Locale.getDefault()) else it.uppercase(Locale.getDefault())
         }
 }
