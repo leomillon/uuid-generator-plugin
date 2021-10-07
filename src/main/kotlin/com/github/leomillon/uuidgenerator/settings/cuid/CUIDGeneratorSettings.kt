@@ -1,9 +1,9 @@
 package com.github.leomillon.uuidgenerator.settings.cuid
 
 import com.intellij.openapi.components.PersistentStateComponent
-import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
+import com.intellij.openapi.components.service
 import com.intellij.util.xmlb.XmlSerializerUtil
 import org.jetbrains.annotations.Nullable
 
@@ -13,7 +13,7 @@ class CUIDGeneratorSettings : PersistentStateComponent<CUIDGeneratorSettings>,
 
     companion object {
         val instance: CUIDGeneratorSettings
-            get() = ServiceManager.getService(CUIDGeneratorSettings::class.java)
+            get() = service()
     }
 
     var version = "Unknown"
