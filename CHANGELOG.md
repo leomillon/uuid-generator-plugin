@@ -3,6 +3,8 @@
 ## [Unreleased]
 ### Fixed
 - Set proper link to screenshots in plugin description
+- Since build is now set to 2021.1+
+- Replace missing deprecated service manager usage by new Kotlin methods
 
 ## [4.5.0]
 ### Changed
