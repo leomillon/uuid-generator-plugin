@@ -13,7 +13,7 @@ plugins {
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.0"
     // Gradle Qodana Plugin
-    id("org.jetbrains.qodana") version "0.1.12"
+    id("org.jetbrains.qodana") version "0.1.13"
 }
 
 group = properties("pluginGroup")
@@ -97,7 +97,7 @@ tasks {
             }.joinToString("\n").run { markdownToHTML(this) }
                 .let {
                     val pluginVersion = properties("pluginVersion")
-                    val gitHubContentBasePath = "https://raw.githubusercontent.com/ekino/jcv-idea-plugin"
+                    val gitHubContentBasePath = "https://raw.githubusercontent.com/leomillon/uuid-generator-plugin"
                     val gitHubRef = when {
                         pluginVersion.endsWith("-SNAPSHOT") -> "master"
                         else -> "v$pluginVersion"
