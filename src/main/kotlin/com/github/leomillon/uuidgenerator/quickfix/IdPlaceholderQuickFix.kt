@@ -1,9 +1,7 @@
 package com.github.leomillon.uuidgenerator.quickfix
 
 import com.github.leomillon.uuidgenerator.EditorDocumentUtils
-import com.github.leomillon.uuidgenerator.UUIDGenerator
 import com.intellij.codeInsight.intention.HighPriorityAction
-import com.intellij.codeInsight.intention.LowPriorityAction
 import com.intellij.codeInsight.intention.impl.BaseIntentionAction
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
