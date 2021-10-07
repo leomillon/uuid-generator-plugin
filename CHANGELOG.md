@@ -1,12 +1,14 @@
 # UUID Generator Changelog
 
 ## [Unreleased]
+
+## [4.5.0]
 ### Changed
 - Upgrade to latest [IntelliJ Plugin project template](https://github.com/JetBrains/intellij-platform-plugin-template)
-- IDs generate actions are no more directly available in "Generate" menu but in sub menus #86
+- IDs generate actions are no more directly available in Generate menu but in sub menus #86
 
 ### Fixed
-- Replace deprecated service manager usage by new Kotlin methods 
+- Replace deprecated service manager usage by new Kotlin methods
 
 ## [4.4.1]
 ### Fixed
@@ -51,7 +53,8 @@
 - New 'Reformat UUID with settings' action and quick fix
 - IntelliJ IDEA version support since '2020.1'
 
-[Unreleased]: https://github.com/leomillon/uuid-generator-plugin/compare/4.4.1...HEAD
+[Unreleased]: https://github.com/leomillon/uuid-generator-plugin/compare/4.5.0...HEAD
+[4.5.0]: https://github.com/leomillon/uuid-generator-plugin/compare/4.4.1...4.5.0
 [4.4.1]: https://github.com/leomillon/uuid-generator-plugin/compare/4.4.0...4.4.1
 [4.4.0]: https://github.com/leomillon/uuid-generator-plugin/compare/4.3.2...4.4.0
 [4.3.2]: https://github.com/leomillon/uuid-generator-plugin/compare/4.3.1...4.3.2
